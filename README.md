@@ -19,9 +19,9 @@
 
 | Paket | Keunggulan Utama | Harga Mulai |
 | :--- | :--- | :--- |
-| **Basic** | Landing Page Kilat & Responsif | Rp 135.000 |
-| **Standard** | Company Profile Instansi/Sekolah | Rp 235.000 |
-| **Advanced** | Custom Smart System & Automasi | Rp 350.000 |
+| **Basic** | Landing Page Kilat & Responsif | Rp 1.000.000 |
+| **Standard** | Company Profile Instansi/Sekolah | Rp 2.000.000 |
+| **Advanced** | Custom Smart System & Automasi | Rp 3.000.000 |
 
 ---
 
