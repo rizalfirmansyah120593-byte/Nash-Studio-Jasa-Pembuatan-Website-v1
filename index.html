@@ -1,0 +1,1880 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nash Studio - Jasa Pembuatan Website & Sistem Digital Premium</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#FEFDF9',  
+                            100: '#FEF3C7', 
+                            200: '#FDE68A', 
+                            500: '#F59E0B', 
+                            600: '#D97706', // Primary Amber
+                            700: '#B45309', 
+                            900: '#78350F', 
+                        },
+                        accent: {
+                            orange: '#EA580C', // Sunset Terracotta
+                            dark: '#0F172A',
+                            clayBg: '#F0F4F8', // Soft background for Claymorphism to pop
+                        }
+                    },
+                    width: {
+                        '50': '12.5rem', // Custom 200px width
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Base claymorphism background */
+        body {
+            background-color: #151e27;
+        }
+
+        /* White Claymorphism Card */
+        .clay-card-white {
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 
+                8px 8px 16px rgba(163, 177, 198, 0.45), 
+                -8px -8px 16px rgba(255, 255, 255, 0.9),
+                inset 3px 3px 6px rgba(255, 255, 255, 0.6),
+                inset -3px -3px 6px rgba(163, 177, 198, 0.15);
+        }
+
+        /* Colored Claymorphism Card (Orange Gradient) */
+        .clay-card-colored {
+            background: linear-gradient(135deg, #F59E0B 0%, #EA580C 100%);
+            border-radius: 24px;
+            box-shadow: 
+                8px 8px 16px rgba(234, 88, 12, 0.3), 
+                -8px -8px 16px rgba(255, 255, 255, 0.5),
+                inset 4px 4px 8px rgba(255, 255, 255, 0.4),
+                inset -4px -4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Amber Claymorphic Button */
+        .clay-btn-amber {
+            background: #D97706;
+            box-shadow: 
+                4px 4px 8px rgba(217, 119, 6, 0.3), 
+                -4px -4px 8px rgba(255, 255, 255, 0.7),
+                inset 2.5px 2.5px 5px rgba(255, 255, 255, 0.4),
+                inset -2.5px -2.5px 5px rgba(0, 0, 0, 0.15);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .clay-btn-amber:hover {
+            background: #F59E0B;
+            transform: translateY(-1px);
+            box-shadow: 
+                6px 6px 12px rgba(217, 119, 6, 0.35), 
+                -6px -6px 12px rgba(255, 255, 255, 0.8),
+                inset 3px 3px 6px rgba(255, 255, 255, 0.5),
+                inset -3px -3px 6px rgba(0, 0, 0, 0.15);
+        }
+        .clay-btn-amber:active {
+            transform: translateY(1px) scale(0.97);
+            box-shadow: 
+                2px 2px 4px rgba(217, 119, 6, 0.2), 
+                inset 1px 1px 2px rgba(255, 255, 255, 0.3),
+                inset -1px -1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* White Claymorphic Button */
+        .clay-btn-white {
+            background: #ffffff;
+            box-shadow: 
+                4px 4px 8px rgba(163, 177, 198, 0.35), 
+                -4px -4px 8px rgba(255, 255, 255, 0.8),
+                inset 2px 2px 4px rgba(255, 255, 255, 0.8),
+                inset -2px -2px 4px rgba(163, 177, 198, 0.15);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .clay-btn-white:hover {
+            background: #F8FAFC;
+            transform: translateY(-1px);
+            box-shadow: 
+                6px 6px 12px rgba(163, 177, 198, 0.4), 
+                -6px -6px 12px rgba(255, 255, 255, 0.9),
+                inset 3px 3px 6px rgba(255, 255, 255, 0.9),
+                inset -3px -3px 6px rgba(163, 177, 198, 0.2);
+        }
+        .clay-btn-white:active {
+            transform: translateY(1px) scale(0.97);
+            box-shadow: 
+                2px 2px 4px rgba(163, 177, 198, 0.2), 
+                inset 1px 1px 2px rgba(255, 255, 255, 0.6),
+                inset -1px -1px 2px rgba(163, 177, 198, 0.1);
+        }
+
+        /* Claymorphic Form Inputs */
+        .clay-input {
+            background: #F8FAFC;
+            border: none;
+            box-shadow: 
+                inset 2px 2px 5px rgba(163, 177, 198, 0.25), 
+                inset -2px -2px 5px rgba(255, 255, 255, 0.8),
+                1px 1px 2px rgba(255, 255, 255, 0.5);
+            transition: all 0.2s ease;
+        }
+        .clay-input:focus {
+            background: #ffffff;
+            box-shadow: 
+                inset 2px 2px 5px rgba(217, 119, 6, 0.15), 
+                inset -2px -2px 5px rgba(255, 255, 255, 0.8),
+                0 0 0 3px rgba(217, 119, 6, 0.2);
+        }
+
+        /* Custom glass header */
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* Custom smooth expansion for accordion */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .accordion-active .accordion-content {
+            max-height: 150px;
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #D97706 0%, #EA580C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* Typing effect cursor */
+        .typed-cursor {
+            opacity: 1;
+            animation: blink 0.7s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased overflow-x-hidden selection:bg-brand-100 selection:text-brand-900">
+
+    <!-- NAVIGATION HEADER (Thin Border & Small Py) -->
+    <header id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 py-1.5 border-b-[0.5px] border-slate-100/80 bg-white/95">
+        <div class="max-w-6xl mx-auto px-4 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#hero" class="flex items-center gap-2 group">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-600 to-accent-orange flex items-center justify-center text-white shadow-sm group-hover:scale-105 transition-transform duration-300">
+                    <i data-lucide="code-2" class="w-4 h-4"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-display font-extrabold text-sm tracking-tight text-slate-900 leading-tight">Nash <span class="text-brand-600">Studio</span></span>
+                    <span class="text-[8px] text-slate-400 font-bold tracking-wider uppercase leading-none">Digital Partner</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Menu -->
+            <nav class="hidden md:flex items-center gap-4 font-medium text-[11px] uppercase tracking-wider text-slate-600">
+                <a href="#solusi" class="hover:text-brand-600 transition-colors duration-150">Layanan</a>
+                <a href="#portfolio" class="hover:text-brand-600 transition-colors duration-150">Portofolio</a>
+                <a href="#keunggulan" class="hover:text-brand-600 transition-colors duration-150">Kenapa Kami</a>
+                <a href="#pricing" class="hover:text-brand-600 transition-colors duration-150">Paket Harga</a>
+                <a href="#faq" class="hover:text-brand-600 transition-colors duration-150">Tanya Jawab</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="hidden md:flex items-center gap-2">
+                <a href="#contact" class="px-2.5 py-1 rounded-lg border border-slate-200 text-[11px] font-semibold hover:bg-slate-50 transition-colors duration-150">Kritik & Saran</a>
+                <button onclick="openConsultationModal()" class="px-3 py-1 rounded-lg clay-btn-amber text-white text-[11px] font-semibold flex items-center gap-1 active:scale-95 transition-all duration-150">
+                    <i data-lucide="phone-call" class="w-3 h-3"></i>
+                    <span>Konsultasi Gratis</span>
+                </button>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <button id="mobile-menu-btn" class="md:hidden p-1 rounded-md hover:bg-slate-50 transition-colors" aria-label="Toggle Menu">
+                <i id="menu-icon" data-lucide="menu" class="w-5 h-5 text-slate-700"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white border-b border-slate-100 shadow-md px-4 py-3 flex flex-col gap-2">
+            <nav class="flex flex-col gap-1.5 font-medium text-xs text-slate-700">
+                <a href="#solusi" class="mobile-link py-1 hover:text-brand-600 border-b border-slate-50">Layanan</a>
+                <a href="#portfolio" class="mobile-link py-1 hover:text-brand-600 border-b border-slate-50">Portofolio</a>
+                <a href="#keunggulan" class="mobile-link py-1 hover:text-brand-600 border-b border-slate-50">Kenapa Kami</a>
+                <a href="#pricing" class="mobile-link py-1 hover:text-brand-600 border-b border-slate-50">Paket Harga</a>
+                <a href="#faq" class="mobile-link py-1 hover:text-brand-600 border-b border-slate-50">Tanya Jawab</a>
+            </nav>
+            <div class="flex flex-col gap-1.5 pt-1.5">
+                <a href="#contact" class="mobile-link text-center py-2 rounded-lg border border-slate-200 text-[10px] font-semibold text-slate-700 hover:bg-slate-50">Kritik & Saran</a>
+                <button onclick="openConsultationModal()" class="w-full py-2 rounded-lg clay-btn-amber text-white text-[10px] font-semibold text-center flex items-center justify-center gap-1">
+                    <i data-lucide="phone-call" class="w-3 h-3"></i>
+                    <span>Mulai Konsultasi Sekarang</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION (Spaced Header Gap with pt-24 / md:pt-36) -->
+    <section id="hero" class="relative pt-24 pb-12 md:pt-36 md:pb-16 bg-slate-50 overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 z-0 pointer-events-none opacity-40">
+            <div class="absolute top-4 right-[-10%] w-[300px] h-[300px] rounded-full bg-brand-100/40 blur-[60px]"></div>
+            <div class="absolute bottom-4 left-[-15%] w-[400px] h-[400px] rounded-full bg-orange-100/40 blur-[80px]"></div>
+        </div>
+
+        <div class="max-w-4xl mx-auto px-4 relative z-10 flex flex-col items-center text-center">
+            <!-- Main Heading with TYPING EFFECT on Two Lines -->
+            <h1 class="font-display font-extrabold text-2xl sm:text-3xl md:text-4xl text-slate-900 leading-tight max-w-2xl tracking-tight mb-3">
+                Jasa Pembuatan Website &<br>
+                Sistem Digital yang <span id="typed-text" class="text-gradient"></span><span class="typed-cursor text-brand-600">|</span>
+            </h1>
+
+            <!-- Subheading -->
+            <p class="text-slate-500 text-xs sm:text-sm max-w-md font-normal leading-relaxed mb-4">
+                Kami membantu kamu mengembangkan website modern yang rapi, super cepat, dan mudah dikelola. Mulai dari landing page penjualan hingga sistem manajemen data internal otomatis.
+            </p>
+
+            <!-- Call to Actions (Perfect size match: w-50 / h-9 clay styled) -->
+            <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto justify-center items-center mb-3">
+                <button onclick="openConsultationModal()" class="w-50 h-9 rounded-xl clay-btn-amber text-white text-xs font-semibold flex items-center justify-center gap-1.5 shrink-0">
+                    <i data-lucide="phone" class="w-3.5 h-3.5"></i>
+                    <span>Mulai Konsultasi Gratis</span>
+                </button>
+                <a href="#portfolio" class="w-50 h-9 rounded-xl clay-btn-white text-slate-700 text-xs font-semibold flex items-center justify-center gap-1 group shrink-0">
+                    <span>Lihat Hasil Kerja</span>
+                    <i data-lucide="arrow-right" class="w-3 h-3 group-hover:translate-x-0.5 transition-transform"></i>
+                </a>
+            </div>
+
+            <!-- Fast process metric -->
+            <div class="flex items-center gap-1 text-[10px] font-bold text-slate-400">
+                <i data-lucide="clock" class="w-3 h-3 text-brand-500"></i>
+                <span>Pengerjaan Kilat: <span class="text-slate-600">3 - 7 Hari Kerja</span></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROBLEM AGITATION SECTION -->
+    <section class="py-12 md:py-14 border-t border-slate-100 bg-slate-100/50">
+        <div class="max-w-5xl mx-auto px-4">
+            <!-- Header -->
+            <div class="text-center max-w-xl mx-auto mb-6">
+                <span class="text-[10px] font-bold tracking-wider text-brand-600 uppercase mb-0.5 block">Hambatan Bisnis</span>
+                <h2 class="font-display font-extrabold text-xl sm:text-2xl text-slate-900 mb-1 leading-tight">
+                    Apakah Kamu Sering Mengalami Kendala Ini?
+                </h2>
+                <p class="text-slate-500 text-xs">
+                    Banyak bisnis dan organisasi kesulitan berkembang karena pengelolaan data yang manual dan pengeluaran sistem yang menguras anggaran.
+                </p>
+            </div>
+
+            <!-- Problem Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- Card 1 -->
+                <div class="clay-card-white p-5 hover:scale-[1.02] transition-transform duration-200 group">
+                    <div class="w-10 h-10 rounded-2xl bg-orange-100 text-accent-orange flex items-center justify-center mb-3 shadow-[inset_1.5px_1.5px_3px_rgba(255,255,255,0.8),_inset_-1.5px_-1.5px_3px_rgba(0,0,0,0.06)]">
+                        <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-sm text-slate-900 mb-1">Belum Punya Website</h3>
+                    <p class="text-slate-500 text-[11px] leading-relaxed">
+                        Calon pembeli akan sulit menaruh kepercayaan penuh jika profil usahamu tidak dapat ditemukan di mesin pencari Google.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="clay-card-white p-5 hover:scale-[1.02] transition-transform duration-200 group">
+                    <div class="w-10 h-10 rounded-2xl bg-orange-100 text-accent-orange flex items-center justify-center mb-3 shadow-[inset_1.5px_1.5px_3px_rgba(255,255,255,0.8),_inset_-1.5px_-1.5px_3px_rgba(0,0,0,0.06)]">
+                        <i data-lucide="book-open" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-sm text-slate-900 mb-1">Pencatatan Masih Manual</h3>
+                    <p class="text-slate-500 text-[11px] leading-relaxed">
+                        Pengelolaan stok, kasir harian, dan keuangan usahamu rawan berantakan jika hanya mengandalkan buku catatan fisik.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="clay-card-white p-5 hover:scale-[1.02] transition-transform duration-200 group">
+                    <div class="w-10 h-10 rounded-2xl bg-orange-100 text-accent-orange flex items-center justify-center mb-3 shadow-[inset_1.5px_1.5px_3px_rgba(255,255,255,0.8),_inset_-1.5px_-1.5px_3px_rgba(0,0,0,0.06)]">
+                        <i data-lucide="dollar-sign" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-sm text-slate-900 mb-1">Biaya Server Sangat Mahal</h3>
+                    <p class="text-slate-500 text-[11px] leading-relaxed">
+                        Ingin menerapkan sistem digital tapi terhambat oleh besarnya biaya sewa hosting dan server tahunan yang terus naik.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Serverless Value Prop Banner -->
+            <div class="mt-6 p-6 clay-card-colored text-white relative overflow-hidden">
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.12),transparent)] pointer-events-none"></div>
+                <div class="relative z-10 max-w-4xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                    <div class="space-y-1">
+                        <span class="inline-block px-2.5 py-0.5 bg-white/20 backdrop-blur-md rounded-full text-[9px] font-bold tracking-wider uppercase shadow-[inset_1px_1px_2px_rgba(255,255,255,0.4)]">Inovasi Bebas Biaya Server</span>
+                        <h3 class="font-display font-extrabold text-lg leading-tight">Solusi Bebas Biaya Server Tahunan!</h3>
+                        <p class="text-white/90 text-[11px] max-w-xl font-normal leading-relaxed">
+                            Kami merancang website dan sistem internal cerdas menggunakan infrastruktur cloud handal. Hasilnya cepat, aman, stabil, dan 100% bebas biaya langganan hosting selamanya.
+                        </p>
+                    </div>
+                    <a href="#pricing" class="px-4 py-2.5 rounded-xl bg-white text-brand-700 font-bold hover:bg-slate-50 active:scale-95 transition-all duration-150 text-[11px] shrink-0 shadow-[4px_4px_8px_rgba(0,0,0,0.08),_inset_2px_2px_4px_rgba(255,255,255,0.8)]">
+                        Lihat Jasa Kami
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="solusi" class="py-12 md:py-14 bg-slate-50">
+        <div class="max-w-5xl mx-auto px-4">
+            <!-- Header -->
+            <div class="text-center max-w-xl mx-auto mb-6">
+                <span class="text-[10px] font-bold tracking-wider text-brand-600 uppercase mb-0.5 block">Layanan Kami</span>
+                <h2 class="font-display font-extrabold text-xl sm:text-2xl text-slate-900 mb-1">
+                    Solusi Website & Sistem Untuk Usahamu
+                </h2>
+                <p class="text-slate-500 text-xs">
+                    Pilih jenis solusi digital terbaik yang disesuaikan secara khusus demi meningkatkan efisiensi harian kamu.
+                </p>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <!-- Service 1 -->
+                <div class="clay-card-white p-5 hover:translate-y-[-2px] transition-transform duration-200 flex flex-col items-start bg-white group">
+                    <div class="w-9 h-9 rounded-xl bg-amber-50 text-brand-600 flex items-center justify-center mb-3 shadow-[inset_1px_1px_2px_rgba(255,255,255,0.8),_inset_-1px_-1px_2px_rgba(163,177,198,0.1)]">
+                        <i data-lucide="rocket" class="w-4 h-4"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-sm text-slate-900 mb-1">Landing Page Penjualan</h3>
+                    <p class="text-slate-500 text-[11px] leading-relaxed">
+                        Halaman konversi tinggi, modern, dan cepat dimuat untuk mendongkrak penjualan produk atau jasa yang kamu miliki.
+                    </p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="clay-card-white p-5 hover:translate-y-[-2px] transition-transform duration-200 flex flex-col items-start bg-white group">
+                    <div class="w-9 h-9 rounded-xl bg-amber-50 text-brand-600 flex items-center justify-center mb-3 shadow-[inset_1px_1px_2px_rgba(255,255,255,0.8),_inset_-1px_-1px_2px_rgba(163,177,198,0.1)]">
+                        <i data-lucide="briefcase" class="w-4 h-4"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-sm text-slate-900 mb-1">Company Profile</h3>
+                    <p class="text-slate-500 text-[11px] leading-relaxed">
+                        Profil usaha kamu yang elegan, informatif, tepercaya, dan terintegrasi langsung dengan kontak WhatsApp serta lokasi peta.
+                    </p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="clay-card-white p-5 hover:translate-y-[-2px] transition-transform duration-200 flex flex-col items-start bg-white group">
+                    <div class="w-9 h-9 rounded-xl bg-amber-50 text-brand-600 flex items-center justify-center mb-3 shadow-[inset_1px_1px_2px_rgba(255,255,255,0.8),_inset_-1px_-1px_2px_rgba(163,177,198,0.1)]">
+                        <i data-lucide="trending-up" class="w-4 h-4"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-sm text-slate-900 mb-1">Dashboard Data Internal</h3>
+                    <p class="text-slate-500 text-[11px] leading-relaxed">
+                        Sistem portal data internal yang fleksibel untuk mempermudah visualisasi dan pemantauan informasi komunitas atau yayasan.
+                    </p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="clay-card-white p-5 hover:translate-y-[-2px] transition-transform duration-200 flex flex-col items-start bg-white group">
+                    <div class="w-9 h-9 rounded-xl bg-amber-50 text-brand-600 flex items-center justify-center mb-3 shadow-[inset_1px_1px_2px_rgba(255,255,255,0.8),_inset_-1px_-1px_2px_rgba(163,177,198,0.1)]">
+                        <i data-lucide="layers" class="w-4 h-4"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-sm text-slate-900 mb-1">Sistem Inventaris Barang</h3>
+                    <p class="text-slate-500 text-[11px] leading-relaxed">
+                        Manajemen stok barang real-time yang ringkas dan ramah seluler untuk toko, gudang, maupun operasional bisnismu.
+                    </p>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="clay-card-white p-5 hover:translate-y-[-2px] transition-transform duration-200 flex flex-col items-start bg-white group">
+                    <div class="w-9 h-9 rounded-xl bg-amber-50 text-brand-600 flex items-center justify-center mb-3 shadow-[inset_1px_1px_2px_rgba(255,255,255,0.8),_inset_-1px_-1px_2px_rgba(163,177,198,0.1)]">
+                        <i data-lucide="calculator" class="w-4 h-4"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-sm text-slate-900 mb-1">Sistem Kasir & Keuangan</h3>
+                    <p class="text-slate-500 text-[11px] leading-relaxed">
+                        Pencatatan kas masuk-keluar digital, pembuatan struk otomatis, dan kalkulasi laporan laba rugi bulanan secara rapi.
+                    </p>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="clay-card-white p-5 hover:translate-y-[-2px] transition-transform duration-200 flex flex-col items-start bg-white group">
+                    <div class="w-9 h-9 rounded-xl bg-amber-50 text-brand-600 flex items-center justify-center mb-3 shadow-[inset_1px_1px_2px_rgba(255,255,255,0.8),_inset_-1px_-1px_2px_rgba(163,177,198,0.1)]">
+                        <i data-lucide="clipboard-check" class="w-4 h-4"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-sm text-slate-900 mb-1">Sistem Absensi Kehadiran</h3>
+                    <p class="text-slate-500 text-[11px] leading-relaxed">
+                        Pencatatan kehadiran mandiri berbasis pelacakan lokasi GPS aman atau scan kode QR praktis dengan pelaporan otomatis.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO SECTION -->
+    <section id="portfolio" class="py-12 md:py-14 border-t border-slate-100 bg-slate-100/50">
+        <div class="max-w-5xl mx-auto px-4">
+            <!-- Header -->
+            <div class="text-center max-w-xl mx-auto mb-6">
+                <span class="text-[10px] font-bold tracking-wider text-brand-600 uppercase mb-0.5 block">Karya Kami</span>
+                <h2 class="font-display font-extrabold text-xl sm:text-2xl text-slate-900 mb-1">
+                    Portofolio Project Terbaru
+                </h2>
+                <p class="text-slate-500 text-xs">
+                    Berikut adalah hasil kerja nyata berupa website dan sistem digital tepercaya yang kami kembangkan untuk para mitra setia kami.
+                </p>
+            </div>
+
+            <!-- Interactive Tabs/Filters -->
+            <div class="flex flex-wrap justify-center items-center gap-1.5 mb-6">
+                <button onclick="filterPortfolio('all')" id="tab-all" class="portfolio-tab px-3.5 py-1 rounded-full text-[11px] font-semibold transition-all duration-200 bg-brand-600 text-white shadow-sm">
+                    Semua
+                </button>
+                <button onclick="filterPortfolio('landing')" id="tab-landing" class="portfolio-tab px-3.5 py-1 rounded-full text-[11px] font-semibold transition-all duration-200 bg-white text-slate-600 border border-slate-200 hover:bg-slate-50">
+                    Landing Page
+                </button>
+                <button onclick="filterPortfolio('profile')" id="tab-profile" class="portfolio-tab px-3.5 py-1 rounded-full text-[11px] font-semibold transition-all duration-200 bg-white text-slate-600 border border-slate-200 hover:bg-slate-50">
+                    Sistem & Company Profile
+                </button>
+            </div>
+
+            <!-- Portfolio Grid -->
+            <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- Portfolio Item 1: Omah Wonogiri (Reservasi Resto) -->
+                <div class="portfolio-item clay-card-white overflow-hidden hover:scale-[1.01] transition-all duration-300 flex flex-col group" data-category="profile">
+                    <div class="relative overflow-hidden aspect-[16/9] bg-[#FAF8F5]">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-brand-900/10 to-transparent z-10"></div>
+                        
+                        <!-- 3D Minimalist Joglo Clay Illustration SVG -->
+                        <svg class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <radialGradient id="sky-grad" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%" stop-color="#FFFDF9"/>
+                                    <stop offset="100%" stop-color="#F2EDE4"/>
+                                </radialGradient>
+                                <linearGradient id="roof-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#F59E0B"/>
+                                    <stop offset="50%" stop-color="#D97706"/>
+                                    <stop offset="100%" stop-color="#78350F"/>
+                                </linearGradient>
+                                <linearGradient id="pillar-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#92400E"/>
+                                    <stop offset="30%" stop-color="#D97706"/>
+                                    <stop offset="70%" stop-color="#78350F"/>
+                                    <stop offset="100%" stop-color="#451A03"/>
+                                </linearGradient>
+                                <radialGradient id="bowl-grad" cx="40%" cy="30%" r="60%">
+                                    <stop offset="0%" stop-color="#FDBA74"/>
+                                    <stop offset="100%" stop-color="#C2410C"/>
+                                </radialGradient>
+                                <filter id="clay-shadow" x="-10%" y="-10%" width="120%" height="120%">
+                                    <feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#78350F" flood-opacity="0.15" />
+                                </filter>
+                                <filter id="soft-blur" x="-20%" y="-20%" width="140%" height="140%">
+                                    <feGaussianBlur stdDeviation="8" />
+                                </filter>
+                            </defs>
+                            
+                            <!-- Sky background -->
+                            <rect width="800" height="500" fill="url(#sky-grad)"/>
+                            
+                            <!-- Soft ground shadow -->
+                            <ellipse cx="400" cy="380" rx="260" ry="40" fill="#E2D9CD" filter="url(#soft-blur)" opacity="0.8"/>
+                            
+                            <!-- Decorative floating 3D spheres -->
+                            <circle cx="150" cy="180" r="28" fill="#FDE68A" filter="url(#clay-shadow)"/>
+                            <circle cx="150" cy="180" r="28" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.6"/>
+                            <circle cx="630" cy="240" r="36" fill="#FED7AA" filter="url(#clay-shadow)"/>
+                            
+                            <!-- Javanese 3D Clay Joglo House -->
+                            <g filter="url(#clay-shadow)">
+                                <!-- Foundation platform (Beveled clay look) -->
+                                <path d="M180 340 L620 340 L590 370 L210 370 Z" fill="#D1C4B4"/>
+                                <path d="M180 340 L210 370 L210 375 L180 345 Z" fill="#A89A8A"/>
+                                <path d="M210 370 L590 370 L590 375 L210 375 Z" fill="#B5A898"/>
+                                
+                                <!-- Main pillars (Rounded cylinders) -->
+                                <rect x="250" y="240" width="14" height="100" rx="7" fill="url(#pillar-grad)"/>
+                                <rect x="536" y="240" width="14" height="100" rx="7" fill="url(#pillar-grad)"/>
+                                <rect x="350" y="210" width="16" height="130" rx="8" fill="url(#pillar-grad)"/>
+                                <rect x="434" y="210" width="16" height="130" rx="8" fill="url(#pillar-grad)"/>
+                                
+                                <!-- Back wall slice -->
+                                <rect x="264" y="235" width="272" height="105" fill="#FDF4E3" opacity="0.9"/>
+                                <rect x="300" y="260" width="60" height="80" rx="6" fill="#E7D7C1"/>
+                                <rect x="440" y="260" width="60" height="80" rx="6" fill="#E7D7C1"/>
+
+                                <!-- Clay Layered Joglo Roof -->
+                                <path d="M150 240 L650 240 L560 180 L240 180 Z" fill="url(#roof-grad)"/>
+                                <path d="M260 180 L540 180 L490 120 L310 120 Z" fill="url(#roof-grad)"/>
+                                <path d="M320 120 L480 120 L450 70 L350 70 Z" fill="url(#roof-grad)"/>
+                                <rect x="340" y="65" width="120" height="8" rx="4" fill="#B45309"/>
+                            </g>
+                            
+                            <!-- Steaming Claypot Bowl in the foreground (Tactile 3D) -->
+                            <g filter="url(#clay-shadow)" transform="translate(400, 395)">
+                                <ellipse cx="0" cy="0" rx="65" ry="25" fill="url(#bowl-grad)"/>
+                                <ellipse cx="0" cy="-3" rx="58" ry="18" fill="#FDBA74"/>
+                                <path d="M-20 -40 Q-15 -60 -25 -80" stroke="#F59E0B" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.8"/>
+                                <path d="M0 -45 Q5 -65 -5 -85" stroke="#EA580C" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.8"/>
+                                <path d="M20 -40 Q25 -60 15 -80" stroke="#F59E0B" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.8"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="p-4 flex-grow flex flex-col justify-between">
+                        <div>
+                            <span class="px-2 py-0.5 bg-brand-50 text-brand-600 rounded-full text-[9px] font-bold uppercase tracking-wider mb-1 inline-block">Company Profile & Reservasi</span>
+                            <h3 class="font-display font-bold text-base text-slate-900 mb-0.5">Omah Wonogiri</h3>
+                            <p class="text-slate-500 text-[11px] leading-relaxed mb-3">
+                                Desain modern untuk sistem pemesanan makanan, katalog menu masakan, dan formulir reservasi meja restoran secara cepat.
+                            </p>
+                        </div>
+                        <a href="https://new-omah-wonogiri-resto-v3.vercel.app/" target="_blank" class="w-full py-1.5 rounded-lg border border-slate-200 hover:border-brand-500 hover:text-brand-600 text-slate-600 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors duration-150">
+                            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                            <span>Lihat Demo Web</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 2: Sistem Keuangan Masjid -->
+                <div class="portfolio-item clay-card-white overflow-hidden hover:scale-[1.01] transition-all duration-300 flex flex-col group" data-category="profile">
+                    <div class="relative overflow-hidden aspect-[16/9] bg-[#FFFBEB]">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-brand-900/10 to-transparent z-10"></div>
+                        
+                        <!-- 3D Minimalist Mosque & Financial Clay Illustration SVG -->
+                        <svg class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <radialGradient id="masjid-sky" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%" stop-color="#FEFDF9"/>
+                                    <stop offset="100%" stop-color="#FEF3C7"/>
+                                </radialGradient>
+                                <linearGradient id="dome-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#F59E0B"/>
+                                    <stop offset="100%" stop-color="#D97706"/>
+                                </linearGradient>
+                                <linearGradient id="wall-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#FFFDF9"/>
+                                    <stop offset="100%" stop-color="#FDE68A"/>
+                                </linearGradient>
+                                <filter id="masjid-shadow" x="-10%" y="-10%" width="120%" height="120%">
+                                    <feDropShadow dx="0" dy="16" stdDeviation="12" flood-color="#78350F" flood-opacity="0.12" />
+                                </filter>
+                                <filter id="glow-blur" x="-20%" y="-20%" width="140%" height="140%">
+                                    <feGaussianBlur stdDeviation="8" />
+                                </filter>
+                            </defs>
+                            
+                            <rect width="800" height="500" fill="url(#masjid-sky)"/>
+                            <ellipse cx="400" cy="390" rx="240" ry="30" fill="#FDE68A" filter="url(#glow-blur)" opacity="0.6"/>
+                            
+                            <!-- Floating Gold Coins (Taktil 3D) -->
+                            <g filter="url(#masjid-shadow)">
+                                <circle cx="160" cy="240" r="22" fill="#F59E0B"/>
+                                <circle cx="160" cy="240" r="15" fill="#FEF3C7" opacity="0.9"/>
+                                <text x="160" y="244" fill="#D97706" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="14" text-anchor="middle">Rp</text>
+                                
+                                <circle cx="650" cy="180" r="28" fill="#F59E0B"/>
+                                <circle cx="650" cy="180" r="20" fill="#FEF3C7" opacity="0.9"/>
+                                <text x="650" y="185" fill="#D97706" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="16" text-anchor="middle">Rp</text>
+                            </g>
+
+                            <!-- Mosque Body and Dome -->
+                            <g filter="url(#masjid-shadow)" transform="translate(240, 120)">
+                                <!-- Pillars -->
+                                <rect x="40" y="130" width="30" height="140" rx="10" fill="url(#wall-grad)"/>
+                                <rect x="250" y="130" width="30" height="140" rx="10" fill="url(#wall-grad)"/>
+                                
+                                <!-- Main block -->
+                                <rect x="60" y="150" width="200" height="120" rx="20" fill="url(#wall-grad)"/>
+                                <rect x="60" y="150" width="200" height="120" rx="20" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.5"/>
+                                
+                                <!-- Arch Doorway -->
+                                <path d="M125 270 L125 210 Q160 180 195 210 L195 270 Z" fill="#78350F"/>
+                                <path d="M135 270 L135 218 Q160 194 185 218 L185 270 Z" fill="#F59E0B" opacity="0.8"/>
+
+                                <!-- Large Clay Dome -->
+                                <path d="M70 150 C70 50, 250 50, 250 150 Z" fill="url(#dome-grad)"/>
+                                <path d="M70 150 C70 50, 250 50, 250 150 Z" fill="none" stroke="#FFFFFF" stroke-width="3" opacity="0.3"/>
+                                
+                                <!-- Small Side Domes -->
+                                <path d="M35 130 C35 90, 75 90, 75 130 Z" fill="url(#dome-grad)" opacity="0.8"/>
+                                <path d="M245 130 C245 90, 285 90, 285 130 Z" fill="url(#dome-grad)" opacity="0.8"/>
+
+                                <!-- Golden Crescent moon and star on dome -->
+                                <path d="M160 20 C175 20, 185 30, 185 45 C185 55, 175 65, 160 65 C150 65, 140 55, 140 45 C140 35, 150 20, 160 20 Z" fill="#FEF3C7"/>
+                                <path d="M164 22 C174 25, 178 35, 175 45 C172 52, 164 58, 156 55 C164 52, 168 44, 164 34 Q161 28, 164 22 Z" fill="#F59E0B"/>
+                            </g>
+
+                            <!-- Chart Sheet floating down-right (Claymorphic stats representation) -->
+                            <g filter="url(#masjid-shadow)" transform="translate(480, 250)">
+                                <rect x="0" y="0" width="160" height="110" rx="20" fill="#FFFFFF"/>
+                                <rect x="15" y="15" width="130" height="8" rx="4" fill="#E2E8F0"/>
+                                <rect x="15" y="30" width="80" height="8" rx="4" fill="#E2E8F0"/>
+                                
+                                <!-- Bar graph representation -->
+                                <rect x="25" y="55" width="14" height="35" rx="5" fill="#EA580C"/>
+                                <rect x="50" y="45" width="14" height="45" rx="5" fill="#F59E0B"/>
+                                <rect x="75" y="65" width="14" height="25" rx="5" fill="#EA580C"/>
+                                <rect x="100" y="35" width="14" height="55" rx="5" fill="#D97706"/>
+                                <circle cx="128" cy="45" r="10" fill="#F59E0B" />
+                                <path d="M125 45 L131 45" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M128 42 L128 48" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="p-4 flex-grow flex flex-col justify-between">
+                        <div>
+                            <span class="px-2 py-0.5 bg-brand-50 text-brand-600 rounded-full text-[9px] font-bold uppercase tracking-wider mb-1 inline-block">Sistem Informasi & Keuangan</span>
+                            <h3 class="font-display font-bold text-base text-slate-900 mb-0.5">Sistem Keuangan Masjid</h3>
+                            <p class="text-slate-500 text-[11px] leading-relaxed mb-3">
+                                Aplikasi pencatatan kas masjid transparan, laporan donasi real-time, dan manajemen inventaris umat berbasis cloud otomatis.
+                            </p>
+                        </div>
+                        <a href="https://sites.google.com/view/sistem-keuangan-masjid-v1/" target="_blank" class="w-full py-1.5 rounded-lg border border-slate-200 hover:border-brand-500 hover:text-brand-600 text-slate-600 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors duration-150">
+                            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                            <span>Lihat Demo Web</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 3: Masterclass Video Creator 2026 -->
+                <div class="portfolio-item clay-card-white overflow-hidden hover:scale-[1.01] transition-all duration-300 flex flex-col group" data-category="landing">
+                    <div class="relative overflow-hidden aspect-[16/9] bg-[#E0E7FF]">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-brand-900/10 to-transparent z-10"></div>
+                        
+                        <!-- 3D Minimalist Video & Camera Clay Illustration SVG -->
+                        <svg class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <radialGradient id="indigo-sky" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%" stop-color="#EEF2FF"/>
+                                    <stop offset="100%" stop-color="#C7D2FE"/>
+                                </radialGradient>
+                                <linearGradient id="cam-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#4F46E5"/>
+                                    <stop offset="100%" stop-color="#312E81"/>
+                                </linearGradient>
+                                <linearGradient id="lens-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#EA580C"/>
+                                    <stop offset="100%" stop-color="#D97706"/>
+                                </linearGradient>
+                                <linearGradient id="btn-play" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#FB923C"/>
+                                    <stop offset="100%" stop-color="#EA580C"/>
+                                </linearGradient>
+                                <filter id="puffy-shadow" x="-10%" y="-10%" width="120%" height="120%">
+                                    <feDropShadow dx="0" dy="16" stdDeviation="12" flood-color="#312E81" flood-opacity="0.18" />
+                                </filter>
+                                <filter id="sh-blur" x="-20%" y="-20%" width="140%" height="140%">
+                                    <feGaussianBlur stdDeviation="10" />
+                                </filter>
+                            </defs>
+                            
+                            <rect width="800" height="500" fill="url(#indigo-sky)"/>
+                            <ellipse cx="400" cy="400" rx="220" ry="30" fill="#93C5FD" filter="url(#sh-blur)" opacity="0.6"/>
+                            
+                            <!-- Floating 3D Elements -->
+                            <circle cx="180" cy="160" r="25" fill="#F472B6" filter="url(#puffy-shadow)"/>
+                            <circle cx="600" cy="140" r="40" fill="#38BDF8" filter="url(#puffy-shadow)"/>
+                            
+                            <!-- Main 3D Camera & Play setup -->
+                            <g filter="url(#puffy-shadow)" transform="translate(180, 110)">
+                                <rect x="120" y="100" width="220" height="150" rx="35" fill="url(#cam-grad)"/>
+                                <rect x="120" y="100" width="220" height="150" rx="35" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.15"/>
+                                
+                                <circle cx="180" cy="70" r="45" fill="#312E81"/>
+                                <circle cx="180" cy="70" r="30" fill="#4F46E5"/>
+                                <circle cx="180" cy="70" r="10" fill="#EEF2FF"/>
+                                
+                                <circle cx="280" cy="70" r="45" fill="#312E81"/>
+                                <circle cx="280" cy="70" r="30" fill="#4F46E5"/>
+                                <circle cx="280" cy="70" r="10" fill="#EEF2FF"/>
+                                
+                                <rect x="330" y="145" width="45" height="60" rx="15" fill="url(#lens-grad)"/>
+                                <ellipse cx="375" cy="175" rx="12" ry="25" fill="#FDBA74"/>
+                                <ellipse cx="375" cy="175" rx="5" ry="12" fill="#FFFFFF" opacity="0.8"/>
+                                
+                                <circle cx="150" cy="130" r="10" fill="#EF4444"/>
+                                <circle cx="148" cy="128" r="4" fill="#FFFFFF" opacity="0.8"/>
+                            </g>
+                            
+                            <!-- Giant 3D Play Button (Puffy Clay) floating in front -->
+                            <g filter="url(#puffy-shadow)" transform="translate(420, 210)">
+                                <rect x="0" y="0" width="160" height="160" rx="45" fill="url(#btn-play)"/>
+                                <rect x="0" y="0" width="160" height="160" rx="45" fill="none" stroke="#FFFFFF" stroke-width="3" opacity="0.4"/>
+                                <path d="M15 45 C45 15, 115 15, 145 45" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.3"/>
+                                <path d="M60 50 L115 80 L60 110 Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="p-4 flex-grow flex flex-col justify-between">
+                        <div>
+                            <span class="px-2 py-0.5 bg-brand-50 text-brand-600 rounded-full text-[9px] font-bold uppercase tracking-wider mb-1 inline-block">Landing Page</span>
+                            <h3 class="font-display font-bold text-base text-slate-900 mb-0.5">Masterclass Video Creator 2026</h3>
+                            <p class="text-slate-500 text-[11px] leading-relaxed mb-3">
+                                Landing page pendaftaran seminar akbar teknik editing video modern secara daring maupun luring dengan konversi tinggi.
+                            </p>
+                        </div>
+                        <a href="https://sites.google.com/view/pendaftaran-seminar-editing-vi" target="_blank" class="w-full py-1.5 rounded-lg border border-slate-200 hover:border-brand-500 hover:text-brand-600 text-slate-600 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors duration-150">
+                            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                            <span>Lihat Demo Web</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 4: Sistem Kasir Pintar -->
+                <div class="portfolio-item clay-card-white overflow-hidden hover:scale-[1.01] transition-all duration-300 flex flex-col group" data-category="profile">
+                    <div class="relative overflow-hidden aspect-[16/9] bg-[#F1F5F9]">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-brand-900/10 to-transparent z-10"></div>
+                        
+                        <!-- 3D Minimalist POS Cash Register Clay Illustration SVG -->
+                        <svg class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <radialGradient id="pos-sky" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%" stop-color="#FFFFFF"/>
+                                    <stop offset="100%" stop-color="#E2E8F0"/>
+                                </radialGradient>
+                                <linearGradient id="body-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" stop-color="#CBD5E1"/>
+                                    <stop offset="100%" stop-color="#94A3B8"/>
+                                </linearGradient>
+                                <linearGradient id="screen-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#D97706"/>
+                                    <stop offset="100%" stop-color="#EA580C"/>
+                                </linearGradient>
+                                <filter id="pos-shadow" x="-10%" y="-10%" width="120%" height="120%">
+                                    <feDropShadow dx="0" dy="16" stdDeviation="12" flood-color="#475569" flood-opacity="0.15" />
+                                </filter>
+                            </defs>
+                            
+                            <rect width="800" height="500" fill="url(#pos-sky)"/>
+                            <ellipse cx="400" cy="400" rx="200" ry="25" fill="#94A3B8" opacity="0.4" />
+
+                            <!-- Floating Sales Receipt & Arrow -->
+                            <g filter="url(#pos-shadow)" transform="translate(120, 150)">
+                                <rect x="0" y="0" width="130" height="180" rx="15" fill="#FFFFFF"/>
+                                <!-- Receipt details -->
+                                <line x1="20" y1="30" x2="110" y2="30" stroke="#E2E8F0" stroke-width="6" stroke-linecap="round"/>
+                                <line x1="20" y1="50" x2="80" y2="50" stroke="#EA580C" stroke-width="6" stroke-linecap="round"/>
+                                <line x1="20" y1="70" x2="100" y2="70" stroke="#E2E8F0" stroke-width="4" stroke-linecap="round"/>
+                                <line x1="20" y1="90" x2="90" y2="90" stroke="#E2E8F0" stroke-width="4" stroke-linecap="round"/>
+                                
+                                <rect x="20" y="115" width="90" height="40" rx="8" fill="#FEF3C7"/>
+                                <text x="65" y="140" fill="#EA580C" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="14" text-anchor="middle">LUNAS</text>
+                            </g>
+                            
+                            <!-- Cash Register Main Setup (3D Clay look) -->
+                            <g filter="url(#pos-shadow)" transform="translate(320, 110)">
+                                <!-- Beveled stand/base -->
+                                <rect x="20" y="190" width="260" height="100" rx="25" fill="url(#body-grad)"/>
+                                <rect x="20" y="220" width="260" height="20" fill="#64748B"/>
+                                
+                                <!-- Drawer button -->
+                                <rect x="120" y="250" width="60" height="16" rx="8" fill="#F59E0B"/>
+                                <circle cx="150" cy="258" r="4" fill="#FFFFFF"/>
+
+                                <!-- Tablet-like POS Monitor (Glossy, curved clay edges) -->
+                                <rect x="40" y="50" width="220" height="150" rx="20" fill="#475569"/>
+                                <rect x="48" y="58" width="204" height="134" rx="14" fill="url(#screen-grad)"/>
+                                
+                                <!-- Screen emblem / shopping cart -->
+                                <circle cx="150" cy="115" r="30" fill="#FFFFFF" opacity="0.2"/>
+                                <path d="M135 110 L145 110 L152 125 L165 125" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" fill="none"/>
+                                <circle cx="146" cy="132" r="4" fill="#FFFFFF"/>
+                                <circle cx="158" cy="132" r="4" fill="#FFFFFF"/>
+                                
+                                <!-- Receipt Slot output -->
+                                <rect x="235" y="202" width="4" height="25" rx="2" fill="#475569"/>
+                            </g>
+
+                            <!-- Mini floating Coins around Register -->
+                            <g filter="url(#pos-shadow)">
+                                <circle cx="610" cy="350" r="16" fill="#F59E0B"/>
+                                <circle cx="610" cy="350" r="11" fill="#FEF3C7" opacity="0.9"/>
+                                <circle cx="640" cy="380" r="22" fill="#F59E0B"/>
+                                <circle cx="640" cy="380" r="15" fill="#FEF3C7" opacity="0.9"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="p-4 flex-grow flex flex-col justify-between">
+                        <div>
+                            <span class="px-2 py-0.5 bg-brand-50 text-brand-600 rounded-full text-[9px] font-bold uppercase tracking-wider mb-1 inline-block">Aplikasi Kasir & POS</span>
+                            <h3 class="font-display font-bold text-base text-slate-900 mb-0.5">Sistem Kasir Pintar</h3>
+                            <p class="text-slate-500 text-[11px] leading-relaxed mb-3">
+                                Sistem POS kasir digital cerdas, cetak struk otomatis, integrasi barcode scanner, dan laporan laba rugi bulanan langsung di HP.
+                            </p>
+                        </div>
+                        <a href="https://sites.google.com/view/sistem-kasir-v2/keuangan" target="_blank" class="w-full py-1.5 rounded-lg border border-slate-200 hover:border-brand-500 hover:text-brand-600 text-slate-600 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors duration-150">
+                            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                            <span>Lihat Demo Web</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 5: NashCafe (Reservasi Cafe) -->
+                <div class="portfolio-item clay-card-white overflow-hidden hover:scale-[1.01] transition-all duration-300 flex flex-col group" data-category="profile">
+                    <div class="relative overflow-hidden aspect-[16/9] bg-[#F7F2EB]">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-brand-900/10 to-transparent z-10"></div>
+                        
+                        <!-- 3D Minimalist Coffee Cup Clay Illustration SVG -->
+                        <svg class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <radialGradient id="coffee-bg" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%" stop-color="#FDFBF7"/>
+                                    <stop offset="100%" stop-color="#EADCC9"/>
+                                </radialGradient>
+                                <linearGradient id="cup-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" stop-color="#EA580C"/>
+                                    <stop offset="100%" stop-color="#9A3412"/>
+                                </linearGradient>
+                                <linearGradient id="handle-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#F97316"/>
+                                    <stop offset="100%" stop-color="#C2410C"/>
+                                </linearGradient>
+                                <filter id="clay-mug" x="-10%" y="-10%" width="120%" height="120%">
+                                    <feDropShadow dx="4" dy="16" stdDeviation="10" flood-color="#7C2D12" flood-opacity="0.16" />
+                                </filter>
+                                <filter id="steam-blur" x="-20%" y="-20%" width="140%" height="140%">
+                                    <feGaussianBlur stdDeviation="4" />
+                                </filter>
+                            </defs>
+                            
+                            <rect width="800" height="500" fill="url(#coffee-bg)"/>
+                            <ellipse cx="400" cy="380" rx="180" ry="24" fill="#D3C2B0" opacity="0.6" filter="url(#steam-blur)"/>
+                            
+                            <!-- Floating Coffee Beans (3D clay style) -->
+                            <g filter="url(#clay-mug)">
+                                <ellipse cx="180" cy="220" rx="20" ry="14" fill="#78350F" transform="rotate(-25, 180, 220)"/>
+                                <ellipse cx="600" cy="180" rx="24" ry="16" fill="#78350F" transform="rotate(35, 600, 180)"/>
+                                <ellipse cx="580" cy="280" rx="16" ry="11" fill="#92400E" transform="rotate(-15, 580, 280)"/>
+                            </g>
+                            
+                            <!-- Giant 3D Coffee Mug -->
+                            <g filter="url(#clay-mug)">
+                                <path d="M440 200 C490 200, 520 230, 520 260 C520 290, 490 320, 440 320" stroke="url(#handle-grad)" stroke-width="26" stroke-linecap="round" fill="none"/>
+                                <path d="M440 200 C490 200, 520 230, 520 260 C520 290, 490 320, 440 320" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.2"/>
+                                
+                                <rect x="260" y="170" width="190" height="180" rx="40" fill="url(#cup-grad)"/>
+                                <rect x="260" y="170" width="190" height="180" rx="40" fill="none" stroke="#FFFFFF" stroke-width="3" opacity="0.25"/>
+                                
+                                <ellipse cx="355" cy="180" rx="80" ry="14" fill="#541C09"/>
+                                <ellipse cx="355" cy="180" rx="72" ry="10" fill="#78350F"/>
+                                <ellipse cx="330" cy="178" rx="15" ry="4" fill="#FDBA74" opacity="0.6"/>
+                                
+                                <circle cx="355" cy="265" r="35" fill="#FFFDF9"/>
+                                <path d="M345 255 L365 255 L355 275 Z" fill="#EA580C"/>
+                            </g>
+                            
+                            <!-- Soft Puffy Steam Clouds -->
+                            <g filter="url(#clay-mug)">
+                                <path d="M310 110 Q320 90 310 70" stroke="#EA580C" stroke-width="5" stroke-linecap="round" fill="none"/>
+                                <path d="M355 100 Q365 75 350 50" stroke="#D97706" stroke-width="5" stroke-linecap="round" fill="none"/>
+                                <path d="M400 110 Q410 90 400 70" stroke="#EA580C" stroke-width="5" stroke-linecap="round" fill="none"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="p-4 flex-grow flex flex-col justify-between">
+                        <div>
+                            <span class="px-2 py-0.5 bg-brand-50 text-brand-600 rounded-full text-[9px] font-bold uppercase tracking-wider mb-1 inline-block">Company Profile & Reservasi</span>
+                            <h3 class="font-display font-bold text-base text-slate-900 mb-0.5">NashCafe</h3>
+                            <p class="text-slate-500 text-[11px] leading-relaxed mb-3">
+                                Platform website profil kedai kopi modern yang dilengkapi modul daftar menu digital terintegrasi dan sistem pesan meja reservasi.
+                            </p>
+                        </div>
+                        <a href="https://sites.google.com/view/pemesanan-reservasi-cafe-v3" target="_blank" class="w-full py-1.5 rounded-lg border border-slate-200 hover:border-brand-500 hover:text-brand-600 text-slate-600 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors duration-150">
+                            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                            <span>Lihat Demo Web</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 6: English Course -->
+                <div class="portfolio-item clay-card-white overflow-hidden hover:scale-[1.01] transition-all duration-300 flex flex-col group" data-category="landing">
+                    <div class="relative overflow-hidden aspect-[16/9] bg-[#FEF3C7]/40">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-brand-900/10 to-transparent z-10"></div>
+                        
+                        <!-- 3D Minimalist English Academy Clay Illustration SVG -->
+                        <svg class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <radialGradient id="acad-bg" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%" stop-color="#FFFDF9"/>
+                                    <stop offset="100%" stop-color="#FEF3C7"/>
+                                </radialGradient>
+                                <linearGradient id="book1-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#EA580C"/>
+                                    <stop offset="100%" stop-color="#9A3412"/>
+                                </linearGradient>
+                                <linearGradient id="book2-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#F59E0B"/>
+                                    <stop offset="100%" stop-color="#92400E"/>
+                                </linearGradient>
+                                <filter id="clay-ac" x="-10%" y="-10%" width="120%" height="120%">
+                                    <feDropShadow dx="4" dy="16" stdDeviation="12" flood-color="#78350F" flood-opacity="0.15" />
+                                </filter>
+                                <filter id="bl-glow" x="-20%" y="-20%" width="140%" height="140%">
+                                    <feGaussianBlur stdDeviation="8" />
+                                </filter>
+                            </defs>
+                            
+                            <rect width="800" height="500" fill="url(#acad-bg)"/>
+                            <ellipse cx="400" cy="390" rx="200" ry="25" fill="#EAD5B3" opacity="0.7" filter="url(#bl-glow)"/>
+                            
+                            <!-- Floating 3D Spheres & Chat Bubble -->
+                            <g filter="url(#clay-ac)">
+                                <circle cx="150" cy="260" r="28" fill="#F59E0B"/>
+                                <circle cx="150" cy="260" r="28" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.4"/>
+                                <rect x="580" y="120" width="100" height="55" rx="20" fill="#EA580C"/>
+                                <path d="M620 175 L610 195 L635 175 Z" fill="#EA580C"/>
+                                <text x="630" y="153" fill="#FFFFFF" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="14" text-anchor="middle">ENG!</text>
+                            </g>
+                            
+                            <!-- 3D Mortarboard (Graduation Cap) & Books -->
+                            <g filter="url(#clay-ac)">
+                                <rect x="230" y="290" width="220" height="40" rx="8" fill="url(#book1-grad)"/>
+                                <rect x="245" y="330" width="195" height="10" rx="3" fill="#FDFBF7"/>
+                                
+                                <rect x="210" y="340" width="260" height="45" rx="8" fill="url(#book2-grad)"/>
+                                <rect x="225" y="385" width="235" height="10" rx="3" fill="#FDFBF7"/>
+                                
+                                <polygon points="340,110 490,145 340,180 190,145" fill="#1E293B"/>
+                                <polygon points="340,116 475,145 340,174 205,145" fill="#334155"/>
+                                <rect x="280" y="165" width="120" height="45" rx="10" fill="#1E293B"/>
+                                <path d="M455 152 L455 210" stroke="#F59E0B" stroke-width="4" stroke-linecap="round"/>
+                                <circle cx="455" cy="214" r="6" fill="#D97706"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="p-4 flex-grow flex flex-col justify-between">
+                        <div>
+                            <span class="px-2 py-0.5 bg-brand-50 text-brand-600 rounded-full text-[9px] font-bold uppercase tracking-wider mb-1 inline-block">Landing Page</span>
+                            <h3 class="font-display font-bold text-base text-slate-900 mb-0.5">Kursus Bahasa Inggris</h3>
+                            <p class="text-slate-500 text-[11px] leading-relaxed mb-3">
+                                Landing page pendaftaran bimbingan belajar bahasa asing interaktif dengan pemetaan level kelas dan detail info silabus belajar lengkap.
+                            </p>
+                        </div>
+                        <a href="https://sites.google.com/view/pendaftaran-kursusbinggris" target="_blank" class="w-full py-1.5 rounded-lg border border-slate-200 hover:border-brand-500 hover:text-brand-600 text-slate-600 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors duration-150">
+                            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                            <span>Lihat Demo Web</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Toggle Show All Projects Button Container (Compact CTA standard width: w-50 / h-9) -->
+            <div id="toggle-portfolio-container" class="mt-8 flex justify-center hidden">
+                <button onclick="toggleShowAllProjects()" id="toggle-portfolio-btn" class="w-50 h-9 rounded-xl clay-btn-white text-slate-700 text-xs font-semibold flex items-center justify-center gap-1.5 transition-all duration-150 active:scale-95 shadow-sm">
+                    <span id="toggle-portfolio-text">Lihat Semua Proyek</span>
+                    <i id="toggle-portfolio-icon" data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-500"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ADVANTAGES / WHY US SECTION -->
+    <section id="keunggulan" class="py-12 md:py-14 bg-slate-50">
+        <div class="max-w-5xl mx-auto px-4">
+            <!-- Header -->
+            <div class="text-center max-w-xl mx-auto mb-6">
+                <span class="text-[10px] font-bold tracking-wider text-brand-600 uppercase mb-0.5 block">Keunggulan Kami</span>
+                <h2 class="font-display font-extrabold text-xl sm:text-2xl text-slate-900 mb-1">
+                    Kenapa Mempercayakan Nash Studio?
+                </h2>
+                <p class="text-slate-500 text-xs">
+                    Kami memahami kamu memerlukan hasil terbaik yang langsung mendongkrak penjualan atau menyederhanakan tugas administrasi secara praktis.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+                <!-- Checklist column -->
+                <div class="space-y-3">
+                    <!-- Feature 1 -->
+                    <div class="flex items-start gap-2.5">
+                        <div class="w-7 h-7 rounded-full bg-amber-100 text-brand-600 flex items-center justify-center shrink-0 shadow-[inset_1px_1px_2px_rgba(255,255,255,0.8)]">
+                            <i data-lucide="check" class="w-4 h-4"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-display font-bold text-sm text-slate-900 mb-0.5">Desain Estetik & Responsif</h4>
+                            <p class="text-slate-500 text-[11px] leading-relaxed">
+                                Tampilan premium yang dioptimalkan agar selalu nyaman dibaca saat diakses dari HP, tablet, maupun komputer.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="flex items-start gap-2.5">
+                        <div class="w-7 h-7 rounded-full bg-amber-100 text-brand-600 flex items-center justify-center shrink-0 shadow-[inset_1px_1px_2px_rgba(255,255,255,0.8)]">
+                            <i data-lucide="check" class="w-4 h-4"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-display font-bold text-sm text-slate-900 mb-0.5">Performa Ringan & Cepat</h4>
+                            <p class="text-slate-500 text-[11px] leading-relaxed">
+                                Kami merancang struktur kode yang efisien, sehingga websitemu memuat halaman secepat kilat dan lebih mudah ditemukan di Google.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="flex items-start gap-2.5">
+                        <div class="w-7 h-7 rounded-full bg-amber-100 text-brand-600 flex items-center justify-center shrink-0 shadow-[inset_1px_1px_2px_rgba(255,255,255,0.8)]">
+                            <i data-lucide="check" class="w-4 h-4"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-display font-bold text-sm text-slate-900 mb-0.5">Gratis Dukungan Teknis & Revisi</h4>
+                            <p class="text-slate-500 text-[11px] leading-relaxed">
+                                Menjamin kepuasan penuh kamu lewat paket revisi gratis serta pendampingan pasca-pengerjaan agar sistem selalu berjalan mulus.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Highlight banners col -->
+                <div class="space-y-4">
+                    <!-- Highlight banner 1 -->
+                    <div class="p-4 clay-card-white flex gap-3.5 items-start">
+                        <div class="w-8 h-8 rounded-lg bg-brand-500 text-white flex items-center justify-center shrink-0 shadow-sm">
+                            <i data-lucide="terminal" class="w-4 h-4"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-display font-bold text-slate-900 text-sm mb-0.5">Bisa Custom Sesuai Alurmu</h4>
+                            <p class="text-slate-500 text-[11px] leading-relaxed">
+                                Cukup beritahu kebutuhan alur bisnismu, tim analis kami akan merancang otomatisasi terpadu yang terkoneksi langsung dengan spreadsheet secara instan.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Highlight banner 2 -->
+                    <div class="p-4 clay-card-white flex gap-3.5 items-start">
+                        <div class="w-8 h-8 rounded-lg bg-accent-orange text-white flex items-center justify-center shrink-0 shadow-sm">
+                            <i data-lucide="database" class="w-4 h-4"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-display font-bold text-slate-900 text-sm mb-0.5">Didukung Ekosistem Google</h4>
+                            <p class="text-slate-500 text-[11px] leading-relaxed">
+                                Kami memanfaatkan Google Spreadsheet sebagai database utama. Sistem ini menjamin website Anda jauh lebih aman dari serangan siber, stabil, dan sangat mudah dikelola mandiri secara real-time.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING SECTION -->
+    <section id="pricing" class="py-12 md:py-14 border-t border-slate-100 bg-slate-100/50">
+        <div class="max-w-5xl mx-auto px-4">
+            <!-- Header -->
+            <div class="text-center max-w-xl mx-auto mb-6">
+                <span class="text-[10px] font-bold tracking-wider text-brand-600 uppercase mb-0.5 block">Investasi Terjangkau</span>
+                <h2 class="font-display font-extrabold text-xl sm:text-2xl text-slate-900 mb-1">
+                    Pilihan Paket Harga Merakyat & Transparan
+                </h2>
+                <p class="text-slate-500 text-xs">
+                    Misi kami adalah menghadirkan website handal dengan biaya sangat hemat dan ramah kantong untuk mendukung semua kalangan digitalisasi.
+                </p>
+            </div>
+
+            <!-- Pricing Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
+                <!-- Paket Basic -->
+                <div class="clay-card-white p-5 flex flex-col justify-between relative group">
+                    <div class="space-y-3">
+                        <div class="space-y-0.5">
+                            <span class="text-[8px] font-bold text-brand-600 bg-brand-50 px-2 py-0.5 rounded-full uppercase tracking-wider">PAKET BASIC</span>
+                            <h3 class="font-display font-extrabold text-base text-slate-900 leading-tight">Landing Page / Profil Kilat</h3>
+                            <p class="text-slate-500 text-[10px]">Pilihan praktis untuk mempromosikan satu produk atau sekadar mengenalkan profil usahamu.</p>
+                        </div>
+
+                        <!-- Price -->
+                        <div class="py-2 border-y border-slate-100">
+                            <span class="text-slate-400 text-[9px] font-medium">Biaya sekali bayar</span>
+                            <div class="flex items-baseline gap-0.5 mt-0.5">
+                                <span class="text-slate-900 font-display font-extrabold text-xl md:text-2xl">Rp 1.000.000</span>
+                                <span class="text-slate-400 text-[9px]">/ Selesai</span>
+                            </div>
+                        </div>
+
+                        <!-- Features -->
+                        <ul class="space-y-1.5 text-xs text-slate-600">
+                            <li class="flex items-start gap-1.5">
+                                <i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-500 shrink-0 mt-0.5"></i>
+                                <span>3 Halaman Utama Informatif</span>
+                            </li>
+                            <li class="flex items-start gap-1.5">
+                                <i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-500 shrink-0 mt-0.5"></i>
+                                <span>Desain Modern & Responsif HP</span>
+                            </li>
+                            <li class="flex items-start gap-1.5">
+                                <i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-500 shrink-0 mt-0.5"></i>
+                                <span>Integrasi Tombol WhatsApp</span>
+                            </li>
+                            <li class="flex items-start gap-1.5">
+                                <i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-500 shrink-0 mt-0.5"></i>
+                                <span>Integrasi Google Maps Kantor</span>
+                            </li>
+                            <li class="flex items-start gap-1.5">
+                                <i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-500 shrink-0 mt-0.5"></i>
+                                <span>Hosting Premium (SSD) : 1 GB SSD</span>
+                            </li>
+                            <li class="flex items-start gap-1.5">
+                                <i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-500 shrink-0 mt-0.5"></i>
+                                <span>Domain .com (1 Tahun)</span>
+                            </li>
+                            <li class="flex items-start gap-1.5">
+                                <i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-500 shrink-0 mt-0.5"></i>
+                                <span>Template Standar</span>
+                            </li>
+                            <li class="flex items-start gap-1.5">
+                                <i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-500 shrink-0 mt-0.5"></i>
+                                <span>SEO Dasar (Optimasi Cepat)</span>
+                            </li>
+                            <li class="flex items-start gap-1.5">
+                                <i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-500 shrink-0 mt-0.5"></i>
+                                <span>Estimasi Pengerjaan: 1 - 2 Hari</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-4">
+                        <button onclick="selectPackage('Paket Basic - Landing Page')" class="w-full py-1.5 rounded-xl clay-btn-white font-semibold text-slate-700 text-[11px] active:scale-95">
+                            Pilih Paket Ini
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Paket Standard -->
+                <div class="clay-card-white p-5 border-2 border-brand-500 flex flex-col justify-between relative group">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-brand-500 text-white text-[8px] font-bold tracking-wider uppercase shadow-sm">
+                        REKOMENDASI UTAMA
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="space-y-0.5">
+                            <span class="text-[8px] font-bold text-brand-600 bg-brand-50 px-2 py-0.5 rounded-full uppercase tracking-wider">PAKET STANDARD</span>
+                            <h3 class="font-display font-extrabold text-base text-slate-900 leading-tight">Company Profile Lengkap</h3>
+                            <p class="text-slate-500 text-[10px]">Sangat tepat untuk profil instansi, organisasi, yayasan, atau institusi sekolah.</p>
+                        </div>
+
+                        <!-- Price -->
+                        <div class="py-2 border-y border-slate-100">
+                            <span class="text-slate-400 text-[9px] font-medium">Biaya sekali bayar</span>
+                            <div class="flex items-baseline gap-0.5 mt-0.5">
+                                <span class="text-slate-900 font-display font-extrabold text-xl md:text-2xl">Rp 2.000.000</span>
+                                <span class="text-slate-400 text-[9px]">/ Selesai</span>
+                            </div>
+                        </div>
+
+                        <!-- Features -->
+                        <ul class="space-y-1.5 text-xs text-slate-600">
+                            <li class="flex items-start gap-1.5">
+                                <i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-500 shrink-0 mt-0.5"></i>
+                                <span class="font-semibold text-slate-800">Hingga 5 Halaman Web Utama</span>
+                            </li>
+                            <li class="flex items-start gap-1.5">
+                                <i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-500 shrink-0 mt-0.5"></i>
+                                <span>Desain UI/UX Modern</span>
+                            </li>
+                            <li class="flex items-start gap-1.5">
+                                <i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-500 shrink-0 mt-0.5"></i>
+                                <span>Integrasi Tombol WhatsApp</span>
+                            </li>
+                            <li class="flex items-start gap-1.5">
+                                <i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-500 shrink-0 mt-0.5"></i>
+                                <span>Integrasi Google Maps Kantor</span>
+                            </li>
+                            <li class="flex items-start gap-1.5">
+                                <i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-500 shrink-0 mt-0.5"></i>
+                                <span>Formulir Kontak Standard</span>
+                            </li>
+                            <li class="flex items-start gap-1.5">
+                                <i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-500 shrink-0 mt-0.5"></i>
+                                <span>Estimasi Pengerjaan: 3 - 5 Hari</span>
+                            </li>
+                            <li class="flex items-start gap-1.5">
+                                <i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-500 shrink-0 mt-0.5"></i>
+                                <span class="text-slate-900 font-medium">Gratis Revisi Maksimal 3x</span>
+                            </li>
+                            <li class="flex items-start gap-1.5">
+                                <i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-500 shrink-0 mt-0.5"></i>
+                                <span class="text-slate-900 font-medium">Hosting Premium (SSD) : 5 GB SSD (Cloud)</span>
+                            </li>
+                            <li class="flex items-start gap-1.5">
+                                <i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-500 shrink-0 mt-0.5"></i>
+                                <span class="text-slate-900 font-medium">SEO On-Page & Meta</span>
+                            </li>
+                            <li class="flex items-start gap-1.5">
+                                <i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-500 shrink-0 mt-0.5"></i>
+                                <span class="text-slate-900 font-medium">Domain (.com, .net, .org) 1 Tahun</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-4">
+                        <button onclick="selectPackage('Paket Standard - Company Profile')" class="w-full py-1.5 rounded-xl clay-btn-amber text-white font-semibold text-[11px] active:scale-95">
+                            Pilih Paket Ini
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Paket Advanced -->
+                <div class="clay-card-white p-5 flex flex-col justify-between relative group">
+                    <div class="space-y-3">
+                        <div class="space-y-0.5">
+                            <span class="text-[8px] font-bold text-orange-600 bg-orange-50 px-2 py-0.5 rounded-full uppercase tracking-wider">PAKET ADVANCED</span>
+                            <h3 class="font-display font-extrabold text-base text-slate-900 leading-tight">Custom Smart System</h3>
+                            <p class="text-slate-500 text-[10px]">Khusus otomatisasi data kasir, stok gudang, absensi, atau sinkronisasi spreadsheet harian.</p>
+                        </div>
+
+                        <!-- Price -->
+                        <div class="py-2 border-y border-slate-100">
+                            <span class="text-slate-400 text-[9px] font-medium">Biaya sekali bayar</span>
+                            <div class="flex items-baseline gap-0.5 mt-0.5 flex-wrap">
+                                <span class="text-slate-900 font-display font-extrabold text-sm md:text-md mr-1">Mulai dari</span>
+                                <span class="text-slate-900 font-display font-extrabold text-xl md:text-2xl">Rp 3.000.000</span>
+                            </div>
+                        </div>
+
+                        <!-- Features -->
+                        <ul class="space-y-1.5 text-xs text-slate-600">
+                            <li class="flex items-start gap-1.5">
+                                <i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-500 shrink-0 mt-0.5"></i>
+                                <span class="font-semibold text-slate-800">Semua Fitur Paket Standard</span>
+                            </li>
+                            <li class="flex items-start gap-1.5">
+                                <i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-500 shrink-0 mt-0.5"></i>
+                                <span>Desain UI/UX Premium & Animasi</span>
+                            </li>
+                            <li class="flex items-start gap-1.5">
+                                <i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-500 shrink-0 mt-0.5"></i>
+                                <span>Formulir Penyimpanan Dinamis</span>
+                            </li>
+                            <li class="flex items-start gap-1.5">
+                                <i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-500 shrink-0 mt-0.5"></i>
+                                <span>Sistem Notifikasi Email</span>
+                            </li>
+                            <li class="flex items-start gap-1.5">
+                                <i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-500 shrink-0 mt-0.5"></i>
+                                <span>Full SEO & Google Search Console</span>
+                            </li>
+                            <li class="flex items-start gap-1.5">
+                                <i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-500 shrink-0 mt-0.5"></i>
+                                <span>Pengerjaan: 5 - 10 Hari Kerja</span>
+                            </li>
+                            <li class="flex items-start gap-1.5">
+                                <i data-lucide="check-circle" class="w-3.5 h-3.5 text-brand-500 shrink-0 mt-0.5"></i>
+                                <span class="text-slate-900 font-medium">Dukungan Garansi 1 Bulan Penuh</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-4">
+                        <button onclick="selectPackage('Paket Advanced - Custom Smart System')" class="w-full py-1.5 rounded-xl clay-btn-white font-semibold text-slate-700 text-[11px] active:scale-95">
+                            Pilih Paket Ini
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section class="py-12 md:py-14 bg-slate-50">
+        <div class="max-w-5xl mx-auto px-4">
+            <!-- Header -->
+            <div class="text-center max-w-xl mx-auto mb-6">
+                <span class="text-[10px] font-bold tracking-wider text-brand-600 uppercase mb-0.5 block">Kepuasan Klien</span>
+                <h2 class="font-display font-extrabold text-xl sm:text-2xl text-slate-900 mb-1">
+                    Apa Kata Mereka Tentang Kami?
+                </h2>
+                <p class="text-slate-500 text-xs">
+                    Kami bangga dapat mendukung serta memudahkan operasional bisnis dan program sosial dari para mitra setia kami.
+                </p>
+            </div>
+
+            <!-- Testimonial Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <!-- Testimonial 1 -->
+                <div class="p-6 clay-card-white flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-0.5">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                        </div>
+                        <p class="text-slate-600 text-[11px] leading-relaxed italic">
+                            "Yang paling membantu itu laporan penjualannya. Saya bisa cek perkembangan toko tanpa harus selalu berada di lokasi."
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-2.5 mt-4 pt-3 border-t border-slate-100/60">
+                        <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-600 text-[10px] shadow-[inset_1px_1px_2px_rgba(255,255,255,0.8),_1px_1px_2px_rgba(0,0,0,0.05)]">HW</div>
+                        <div>
+                            <h4 class="font-display font-bold text-slate-900 text-xs">Hendra Wijaya</h4>
+                            <p class="text-slate-400 text-[9px]">Pemilik Toko Bangunan</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="p-6 clay-card-white flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-0.5">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                        </div>
+                        <p class="text-slate-600 text-[11px] leading-relaxed italic">
+                            "Proses pengerjaannya cukup cepat dan komunikasinya mudah. Website yang dihasilkan sesuai dengan kebutuhan pondok kami."
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-2.5 mt-4 pt-3 border-t border-slate-100/60">
+                        <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-600 text-[10px] shadow-[inset_1px_1px_2px_rgba(255,255,255,0.8),_1px_1px_2px_rgba(0,0,0,0.05)]">AF</div>
+                        <div>
+                            <h4 class="font-display font-bold text-slate-900 text-xs">Ustadz Ahmad Fauzi</h4>
+                            <p class="text-slate-400 text-[9px]">Pengurus Ponpes Al-Nasr</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section id="faq" class="py-12 md:py-14 border-t border-slate-100 bg-slate-100/50">
+        <div class="max-w-2xl mx-auto px-4">
+            <!-- Header -->
+            <div class="text-center mb-6">
+                <span class="text-[10px] font-bold tracking-wider text-brand-600 uppercase mb-0.5 block">Pusat Bantuan</span>
+                <h2 class="font-display font-extrabold text-xl sm:text-2xl text-slate-900 mb-1">
+                    Pertanyaan yang Sering Diajukan
+                </h2>
+                <p class="text-slate-500 text-xs">
+                    Berikut adalah jawaban dari beberapa pertanyaan mendasar seputar pengerjaan website bersama Nash Studio.
+                </p>
+            </div>
+
+            <!-- FAQ Accordions -->
+            <div class="space-y-3">
+                <!-- FAQ Item 1 -->
+                <div class="accordion-item clay-card-white overflow-hidden transition-all duration-200">
+                    <button onclick="toggleAccordion(this)" class="w-full py-3.5 px-4 flex items-center justify-between text-left font-display font-bold text-xs text-slate-900 hover:text-brand-600 transition-colors duration-150">
+                        <span>Apakah website dari Nash Studio memerlukan biaya hosting tahunan?</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 transition-transform duration-200 transform shrink-0"></i>
+                    </button>
+                    <div class="accordion-content bg-slate-50/20">
+                        <div class="p-4 pt-0 text-slate-500 text-[11px] leading-relaxed border-t border-slate-100/50">
+                            Tidak perlu! Sistem modern yang kami bangun memanfaatkan efisiensi cloud server handal sehingga kamu 100% bebas dari biaya tagihan sewa hosting tahunan selamanya.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="accordion-item clay-card-white overflow-hidden transition-all duration-200">
+                    <button onclick="toggleAccordion(this)" class="w-full py-3.5 px-4 flex items-center justify-between text-left font-display font-bold text-xs text-slate-900 hover:text-brand-600 transition-colors duration-150">
+                        <span>Apakah harga yang tertera sudah termasuk domain kustom?</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 transition-transform duration-200 transform shrink-0"></i>
+                    </button>
+                    <div class="accordion-content bg-slate-50/20">
+                        <div class="p-4 pt-0 text-slate-500 text-[11px] leading-relaxed border-t border-slate-100/50">
+                            Harga dasar berfokus pada pengembangan sistem web. Jika kamu memerlukan alamat domain kustom (.com/.id) agar terlihat makin profesional, kami siap membantu pendaftarannya dengan biaya pendaftaran domain yang sangat murah per tahunnya.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="accordion-item bg-white clay-card-white overflow-hidden transition-all duration-200">
+                    <button onclick="toggleAccordion(this)" class="w-full py-3.5 px-4 flex items-center justify-between text-left font-display font-bold text-xs text-slate-900 hover:text-brand-600 transition-colors duration-150">
+                        <span>Bagaimana cara mengelola isi konten website setelah selesai pengerjaan?</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 transition-transform duration-200 transform shrink-0"></i>
+                    </button>
+                    <div class="accordion-content bg-slate-50/20">
+                        <div class="p-4 pt-0 text-slate-500 text-[11px] leading-relaxed border-t border-slate-100/50">
+                            Setiap project dilengkapi panduan serta dasbor pengelolaan yang ramah pengguna. Kamu dapat dengan mudah mengubah teks, gambar, serta memantau data penjualan secara mandiri lewat HP tanpa perlu paham pemrograman.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA SECTION -->
+    <section class="py-12 bg-gradient-to-tr from-brand-900 to-accent-orange text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.06),transparent)] pointer-events-none"></div>
+        <div class="max-w-2xl mx-auto px-4 text-center relative z-10 space-y-4">
+            <h2 class="font-display font-extrabold text-xl sm:text-2xl leading-tight tracking-tight">
+                Siap Jadikan Bisnis Kamu Lebih Maju & Efisien?
+            </h2>
+            <p class="text-brand-100 text-xs max-w-md mx-auto font-normal leading-relaxed">
+                Tinggalkan pencatatan manual yang melelahkan. Kami siap merancang alur kerja otomatis berkecepatan tinggi demi pertumbuhan usahamu.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-2.5">
+                <button onclick="openConsultationModal()" class="px-5 py-2.5 rounded-xl bg-white text-brand-900 text-xs font-bold transition-all duration-150 hover:scale-[1.01] active:scale-95 shadow-[4px_4px_8px_rgba(0,0,0,0.1),_inset_2px_2px_4px_rgba(255,255,255,0.8)] flex items-center justify-center gap-2 mx-auto">
+                    <i data-lucide="message-circle" class="w-4 h-4 text-brand-600"></i>
+                    <span>Hubungi Kami via WhatsApp</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER WITH CONTACT & SUGGESTION FORM -->
+    <footer class="bg-slate-950 text-slate-400 pt-12 pb-6 border-t border-slate-900">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- Brand Info -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-600 to-accent-orange flex items-center justify-center text-white">
+                            <i data-lucide="code-2" class="w-4 h-4"></i>
+                        </div>
+                        <span class="font-display font-extrabold text-sm text-white tracking-tight">Nash <span class="text-brand-500">Studio</span></span>
+                    </div>
+                    <p class="text-[11px] text-slate-400 max-w-sm leading-relaxed">
+                        Jasa pengerjaan website inovatif dan pengembangan sistem administrasi berbasis cloud modern dengan biaya yang sangat terjangkau bagi UMKM, sekolah, dan semua kalangan.
+                    </p>
+                    <div class="flex items-center gap-2">
+                        <a href="#" class="w-7 h-7 rounded-full bg-slate-900 hover:bg-brand-600 hover:text-white flex items-center justify-center transition-colors duration-150 text-slate-400 shadow-[inset_1px_1px_2px_rgba(255,255,255,0.1)]">
+                            <i data-lucide="instagram" class="w-3.5 h-3.5"></i>
+                        </a>
+                        <a href="#" class="w-7 h-7 rounded-full bg-slate-900 hover:bg-brand-600 hover:text-white flex items-center justify-center transition-colors duration-150 text-slate-400 shadow-[inset_1px_1px_2px_rgba(255,255,255,0.1)]">
+                            <i data-lucide="facebook" class="w-3.5 h-3.5"></i>
+                        </a>
+                        <a href="#" class="w-7 h-7 rounded-full bg-slate-900 hover:bg-brand-600 hover:text-white flex items-center justify-center transition-colors duration-150 text-slate-400 shadow-[inset_1px_1px_2px_rgba(255,255,255,0.1)]">
+                            <i data-lucide="mail" class="w-3.5 h-3.5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Critique & Suggestion Form -->
+                <div id="contact" class="bg-slate-900/40 border border-slate-900/60 rounded-3xl p-5 space-y-3 relative overflow-hidden shadow-[inset_1px_1px_2px_rgba(255,255,255,0.05),_0_8px_16px_rgba(0,0,0,0.2)]">
+                    <div class="space-y-0.5">
+                        <h3 class="font-display font-bold text-white text-sm">Formulir Kritik & Saran</h3>
+                        <p class="text-[10px] text-slate-500">Suara kamu sangat berarti demi peningkatan berkelanjutan layanan kami.</p>
+                    </div>
+
+                    <form id="feedback-form" onsubmit="handleFeedbackSubmit(event)" class="space-y-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div class="space-y-1">
+                                <label for="form-name" class="text-[8px] text-slate-400 font-bold uppercase tracking-wider">Nama Kamu</label>
+                                <input type="text" id="form-name" required class="w-full bg-slate-950 border border-transparent rounded-xl px-2.5 py-1.5 text-xs text-white focus:outline-none clay-input" placeholder="Masukkan namamu...">
+                            </div>
+                            <div class="space-y-1">
+                                <label for="form-contact" class="text-[8px] text-slate-400 font-bold uppercase tracking-wider">Kontak (WA/Email)</label>
+                                <input type="text" id="form-contact" required class="w-full bg-slate-950 border border-transparent rounded-xl px-2.5 py-1.5 text-xs text-white focus:outline-none clay-input" placeholder="No WhatsApp / email kamu...">
+                            </div>
+                        </div>
+                        <div class="space-y-1">
+                            <label for="form-message" class="text-[8px] text-slate-400 font-bold uppercase tracking-wider">Isi Kritik & Masukan</label>
+                            <textarea id="form-message" rows="2" required class="w-full bg-slate-950 border border-transparent rounded-xl px-2.5 py-1.5 text-xs text-white focus:outline-none clay-input resize-none" placeholder="Tulis masukan atau saran kamu secara terbuka..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-2 rounded-xl clay-btn-amber text-white font-semibold text-xs flex items-center justify-center gap-1 shadow-sm">
+                            <i data-lucide="send" class="w-3 h-3"></i>
+                            <span>Kirim Masukan</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-900/60 flex flex-col sm:flex-row justify-between items-center gap-2 text-[9px]">
+                <span>&copy; 2026 Nash Studio. Hak Cipta Dilindungi.</span>
+                <div class="flex items-center gap-3">
+                    <a href="#" class="hover:text-white transition-colors">Kebijakan Privasi</a>
+                    <a href="#" class="hover:text-white transition-colors">Syarat Ketentuan</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- DYNAMIC POPUP DIALOGS & MODALS -->
+    <!-- Showcase Modal -->
+    <div id="showcase-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/50 backdrop-blur-sm hidden">
+        <div class="bg-white rounded-3xl max-w-xs w-full p-5 space-y-3 shadow-2xl relative border border-slate-100">
+            <button onclick="closeShowcaseModal()" class="absolute top-3.5 right-3.5 p-1 rounded-full hover:bg-slate-50 text-slate-400 hover:text-slate-600 transition-colors">
+                <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+            <div class="space-y-0.5">
+                <span id="showcase-category" class="px-2 py-0.5 bg-brand-50 text-brand-600 rounded-full text-[8px] font-bold tracking-wide uppercase">Kategori</span>
+                <h3 id="showcase-title" class="font-display font-extrabold text-base text-slate-900 leading-tight">Judul Karya</h3>
+            </div>
+            <p class="text-slate-500 text-[11px] leading-relaxed">
+                Ini adalah visualisasi purwarupa interaktif. Di lingkungan produksi nyata, kami akan mendaftarkan hosting serverless super cepat dengan domain kustom sesuai identitas profesional kamu.
+            </p>
+            <div class="flex items-center gap-2 pt-1.5">
+                <button onclick="closeShowcaseModal()" class="flex-1 py-1.5 rounded-xl border border-slate-200 hover:bg-slate-50 font-semibold text-slate-700 text-xs transition-colors">
+                    Tutup Preview
+                </button>
+                <button onclick="closeShowcaseModal(); openConsultationModal();" class="flex-1 py-1.5 rounded-xl clay-btn-amber text-white font-semibold text-xs flex items-center justify-center gap-1">
+                    <i data-lucide="message-square" class="w-3 h-3"></i>
+                    <span>Tanya Model Ini</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Consultation Modal -->
+    <div id="consultation-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/50 backdrop-blur-sm hidden">
+        <div class="bg-white rounded-3xl max-w-xs w-full p-5 space-y-3 shadow-2xl relative border border-slate-100">
+            <button onclick="closeConsultationModal()" class="absolute top-3.5 right-3.5 p-1 rounded-full hover:bg-slate-50 text-slate-400 hover:text-slate-600 transition-colors">
+                <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+            <div class="text-center space-y-1">
+                <div class="w-8 h-8 rounded-lg bg-brand-50 text-brand-600 flex items-center justify-center mx-auto mb-1">
+                    <i data-lucide="messages-square" class="w-4 h-4"></i>
+                </div>
+                <h3 id="modal-title" class="font-display font-extrabold text-base text-slate-900 leading-none">Konsultasi Gratis</h3>
+                <p class="text-slate-500 text-[10px]">Pilih jalur konsultasi tercepat bersama tim ahli dari Nash Studio.</p>
+            </div>
+
+            <div class="space-y-2">
+                <!-- Path 1 -->
+                <button onclick="redirectToWhatsApp('Konsultasi Umum')" class="w-full p-2.5 rounded-xl border border-slate-100 hover:border-brand-500 bg-slate-50/50 hover:bg-brand-50/25 text-left flex items-center justify-between transition-all duration-200 group">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-7 h-7 rounded-lg bg-amber-50 text-brand-600 flex items-center justify-center shrink-0">
+                            <i data-lucide="phone" class="w-3.5 h-3.5"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-[11px]">Chat via WhatsApp</h4>
+                            <p class="text-[9px] text-slate-400">Terhubung langsung sekarang juga.</p>
+                        </div>
+                    </div>
+                    <i data-lucide="arrow-right" class="w-3 h-3 text-slate-400 group-hover:translate-x-0.5 transition-transform"></i>
+                </button>
+
+                <!-- Path 2 -->
+                <button onclick="redirectToWhatsApp('Tanya Paket Harga')" class="w-full p-2.5 rounded-xl border border-slate-100 hover:border-brand-500 bg-slate-50/50 hover:bg-brand-50/25 text-left flex items-center justify-between transition-all duration-200 group">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-7 h-7 rounded-lg bg-orange-50 text-accent-orange flex items-center justify-center shrink-0">
+                            <i data-lucide="calculator" class="w-3.5 h-3.5"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-[11px]">Diskusikan Paket Harga</h4>
+                            <p class="text-[9px] text-slate-400">Rancang kustomisasi sesuai budgetmu.</p>
+                        </div>
+                    </div>
+                    <i data-lucide="arrow-right" class="w-3 h-3 text-slate-400 group-hover:translate-x-0.5 transition-transform"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-4 right-4 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-slate-900 text-white px-4 py-2.5 rounded-xl shadow-lg flex items-center gap-2 border border-slate-800">
+            <i id="toast-icon" data-lucide="check-circle" class="w-4 h-4 text-brand-400"></i>
+            <span id="toast-text" class="text-xs font-medium">Masukan berhasil dikirimkan!</span>
+        </div>
+    </div>
+
+    <!-- MAIN JAVASCRIPT LOGIC -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Updated WhatsApp Contact Number
+        const WA_PHONE_NUMBER = "6281293161515";
+
+        // Typing Effect Logic
+        const words = ["Keren", "Cepat","Mudah", "Murah", "Estetik"];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typedTextElement = document.getElementById('typed-text');
+
+        function typeEffect() {
+            const currentWord = words[wordIndex];
+            if (isDeleting) {
+                typedTextElement.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typedTextElement.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = 120;
+            if (isDeleting) {
+                typeSpeed /= 2;
+            }
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                typeSpeed = 1500; // Pause on complete word
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                typeSpeed = 300; // Pause before next word
+            }
+
+            setTimeout(typeEffect, typeSpeed);
+        }
+
+        // Global portfolio status variables
+        let showAllProjects = false;
+        let currentCategory = 'all';
+
+        // Run typing effect and dynamic features on DOM load
+        document.addEventListener('DOMContentLoaded', () => {
+            typeEffect();
+            updatePortfolioVisibility();
+        });
+
+        // Navbar Scroll Styling (Compact Transition)
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('glassmorphism', 'shadow-sm', 'border-b-[0.5px]', 'border-slate-200/30');
+            } else {
+                navbar.classList.remove('glassmorphism', 'shadow-sm', 'border-b-[0.5px]', 'border-slate-200/30');
+            }
+        });
+
+        // Mobile Menu Toggling
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            if (isHidden) {
+                mobileMenu.classList.remove('hidden');
+                menuIcon.setAttribute('data-lucide', 'x');
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuIcon.setAttribute('data-lucide', 'menu');
+            }
+            lucide.createIcons();
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.setAttribute('data-lucide', 'menu');
+                lucide.createIcons();
+            });
+        });
+
+        // Portfolio Filtering and Show-more Toggle System
+        function filterPortfolio(category) {
+            currentCategory = category;
+            
+            // Highlight active tab
+            const tabs = document.querySelectorAll('.portfolio-tab');
+            tabs.forEach(tab => {
+                tab.className = "portfolio-tab px-3.5 py-1 rounded-full text-[11px] font-semibold transition-all duration-200 bg-white text-slate-600 border border-slate-200 hover:bg-slate-50";
+            });
+
+            const activeTab = document.getElementById(`tab-${category}`);
+            if (activeTab) {
+                activeTab.className = "portfolio-tab px-3.5 py-1 rounded-full text-[11px] font-semibold transition-all duration-200 bg-brand-600 text-white shadow-sm";
+            }
+
+            updatePortfolioVisibility();
+        }
+
+        function toggleShowAllProjects() {
+            showAllProjects = !showAllProjects;
+            const btnText = document.getElementById('toggle-portfolio-text');
+            const btnIcon = document.getElementById('toggle-portfolio-icon');
+            
+            if (showAllProjects) {
+                btnText.innerText = "Sembunyikan Sebagian";
+                btnIcon.setAttribute('data-lucide', 'chevron-up');
+            } else {
+                btnText.innerText = "Lihat Semua Proyek";
+                btnIcon.setAttribute('data-lucide', 'chevron-down');
+                document.getElementById('portfolio').scrollIntoView({ behavior: 'smooth' });
+            }
+            lucide.createIcons();
+            updatePortfolioVisibility();
+        }
+
+        function updatePortfolioVisibility() {
+            const items = document.querySelectorAll('.portfolio-item');
+            let matchedCount = 0;
+
+            items.forEach(item => {
+                const itemCat = item.getAttribute('data-category');
+                const isMatchingCategory = (currentCategory === 'all' || itemCat === currentCategory);
+
+                if (isMatchingCategory) {
+                    matchedCount++;
+                    
+                    // Show item if we are showing all, OR if it's within the first 4 matches
+                    if (showAllProjects || matchedCount <= 4) {
+                        item.style.display = 'flex';
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'scale(1)';
+                        }, 50);
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.98)';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 200);
+                    }
+                } else {
+                    item.style.opacity = '0';
+                    item.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        item.style.display = 'none';
+                    }, 200);
+                }
+            });
+
+            // Handle the Visibility of "Lihat Semua Proyek" Button
+            const totalMatches = Array.from(items).filter(item => {
+                const itemCat = item.getAttribute('data-category');
+                return currentCategory === 'all' || itemCat === currentCategory;
+            }).length;
+
+            const toggleContainer = document.getElementById('toggle-portfolio-container');
+            if (totalMatches > 4) {
+                toggleContainer.classList.remove('hidden');
+            } else {
+                toggleContainer.classList.add('hidden');
+            }
+        }
+
+        // Accordion (FAQ) System
+        function toggleAccordion(button) {
+            const item = button.parentElement;
+            const icon = button.querySelector('[data-lucide="chevron-down"]');
+            const isActive = item.classList.contains('accordion-active');
+
+            document.querySelectorAll('.accordion-item').forEach(el => {
+                el.classList.remove('accordion-active');
+                const otherIcon = el.querySelector('[data-lucide="chevron-down"]');
+                if (otherIcon) otherIcon.style.transform = 'rotate(0deg)';
+            });
+
+            if (!isActive) {
+                item.classList.add('accordion-active');
+                if (icon) icon.style.transform = 'rotate(180deg)';
+            } else {
+                if (icon) icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Showcase Modal controllers
+        function openShowcaseModal(title, category) {
+            document.getElementById('showcase-title').innerText = title;
+            document.getElementById('showcase-category').innerText = category;
+            document.getElementById('showcase-modal').classList.remove('hidden');
+        }
+
+        function closeShowcaseModal() {
+            document.getElementById('showcase-modal').classList.add('hidden');
+        }
+
+        document.getElementById('showcase-modal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('showcase-modal')) {
+                closeShowcaseModal();
+            }
+        });
+
+        // Consultation Modal controllers
+        function openConsultationModal() {
+            document.getElementById('consultation-modal').classList.remove('hidden');
+        }
+
+        function closeConsultationModal() {
+            document.getElementById('consultation-modal').classList.add('hidden');
+        }
+
+        document.getElementById('consultation-modal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('consultation-modal')) {
+                closeConsultationModal();
+            }
+        });
+
+        // Handle Package Selection & Redirect
+        function selectPackage(packageName) {
+            openConsultationModal();
+            const modalTitle = document.getElementById('modal-title');
+            modalTitle.innerText = `Tertarik dengan ${packageName}`;
+        }
+
+        // Dynamic WhatsApp API Redirect
+        function redirectToWhatsApp(topic) {
+            const text = `Halo Nash Studio, aku tertarik untuk berkonsultasi mengenai: ${topic}. Boleh info selengkapnya? Terima kasih banyak ya!`;
+            const encodedText = encodeURIComponent(text);
+            window.open(`https://api.whatsapp.com/send?phone=${WA_PHONE_NUMBER}&text=${encodedText}`, '_blank');
+            closeConsultationModal();
+        }
+
+        // Custom Toast Notification System
+        function showToast(message, isSuccess = true) {
+            const toast = document.getElementById('toast');
+            const toastText = document.getElementById('toast-text');
+            const toastIcon = document.getElementById('toast-icon');
+
+            toastText.innerText = message;
+            if (isSuccess) {
+                toastIcon.setAttribute('data-lucide', 'check-circle');
+                toastIcon.className = "w-4 h-4 text-emerald-400";
+            } else {
+                toastIcon.setAttribute('data-lucide', 'alert-circle');
+                toastIcon.className = "w-4 h-4 text-rose-400";
+            }
+            lucide.createIcons();
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Form Submission - Now opens WhatsApp with structured data
+        function handleFeedbackSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('form-name').value;
+            const contact = document.getElementById('form-contact').value;
+            const message = document.getElementById('form-message').value;
+
+            if (name && contact && message) {
+                // Formatting message for WhatsApp
+                const waMessage = `Halo Nash Studio! Aku ingin mengirimkan Kritik & Saran:\n\n` +
+                                  `*Nama:* ${name}\n` +
+                                  `*Kontak:* ${contact}\n` +
+                                  `*Kritik & Saran:* ${message}`;
+                                  
+                const encodedText = encodeURIComponent(waMessage);
+                
+                // Show notification toast first
+                showToast(`Menghubungkan ke WhatsApp... Terima kasih banyak ya, ${name}!`);
+                
+                // Open WhatsApp in a new tab
+                setTimeout(() => {
+                    window.open(`https://api.whatsapp.com/send?phone=${WA_PHONE_NUMBER}&text=${encodedText}`, '_blank');
+                    document.getElementById('feedback-form').reset();
+                }, 1000);
+            } else {
+                showToast('Mohon lengkapi seluruh kolom masukan ya!', false);
+            }
+        }
+    </script>
+</body>
+</html>
