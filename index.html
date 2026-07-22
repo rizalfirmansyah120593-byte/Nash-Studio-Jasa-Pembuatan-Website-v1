@@ -12,6 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     
     <script>
         tailwind.config = {
@@ -46,6 +48,19 @@
     </script>
     
     <style>
+        @keyframes scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            animation: scroll 40s linear infinite;
+            display: flex;
+            width: max-content; /* Memastikan track mengikuti lebar konten */
+        }
+        .marquee-container:hover .animate-marquee {
+            animation-play-state: paused;
+        }
+
         /* Base claymorphism background */
         body {
             background-color: #151e27;
@@ -1296,69 +1311,81 @@
     </section>
 
     <!-- TESTIMONIALS SECTION -->
-    <section class="py-12 md:py-14 bg-slate-50">
-        <div class="max-w-5xl mx-auto px-4">
-            <!-- Header -->
-            <div class="text-center max-w-xl mx-auto mb-6">
-                <span class="text-[10px] font-bold tracking-wider text-brand-600 uppercase mb-0.5 block">Kepuasan Klien</span>
-                <h2 class="font-display font-extrabold text-xl sm:text-2xl text-slate-900 mb-1">
-                    Apa Kata Mereka Tentang Kami?
-                </h2>
-                <p class="text-slate-500 text-xs">
-                    Kami bangga dapat mendukung serta memudahkan operasional bisnis dan program sosial dari para mitra setia kami.
-                </p>
-            </div>
+<section id="testimoni" class="py-16 bg-slate-50 overflow-hidden">
+    <div class="max-w-xl mx-auto text-center mb-10 px-4">
+        <span class="text-[10px] font-bold tracking-widest text-brand-600 uppercase mb-2 block">Kepuasan Klien</span>
+        <h2 class="font-display font-extrabold text-2xl text-slate-900">Apa Kata Mereka?</h2>
+    </div>
 
-            <!-- Testimonial Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <!-- Testimonial 1 -->
-                <div class="p-6 clay-card-white flex flex-col justify-between">
-                    <div class="space-y-3">
-                        <div class="flex items-center gap-0.5">
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
-                        </div>
-                        <p class="text-slate-600 text-[11px] leading-relaxed italic">
-                            "Yang paling membantu itu laporan penjualannya. Saya bisa cek perkembangan toko tanpa harus selalu berada di lokasi."
-                        </p>
-                    </div>
-                    <div class="flex items-center gap-2.5 mt-4 pt-3 border-t border-slate-100/60">
-                        <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-600 text-[10px] shadow-[inset_1px_1px_2px_rgba(255,255,255,0.8),_1px_1px_2px_rgba(0,0,0,0.05)]">HW</div>
-                        <div>
-                            <h4 class="font-display font-bold text-slate-900 text-xs">Hendra Wijaya</h4>
-                            <p class="text-slate-400 text-[9px]">Pemilik Toko Bangunan</p>
-                        </div>
-                    </div>
-                </div>
+    <!-- Container Utama -->
+    <div class="relative w-full overflow-hidden">
+        <div id="marquee-content" class="flex gap-6 w-max">
+            <!-- Testimonial List -->
+            <script>
+                const data = [
+                    {n: "Hendra W.", r: "Pemilik Toko", t: "Sistemnya sangat membantu laporan harian saya!"},
+                    {n: "Budi S.", r: "Manager", t: "Pengerjaan sangat cepat dan profesional."},
+                    {n: "Siti A.", r: "Owner Online Shop", t: "Website sangat memudahkan transaksi pelanggan."},
+                    {n: "Andi P.", r: "Yayasan", t: "Layanan terbaik untuk kebutuhan digital kami."},
+                    {n: "Dewi L.", r: "Designer", t: "Desainnya estetik dan sangat responsif."},
+                    {n: "Rizky F.", r: "Startup Founder", t: "Sangat puas dengan performa aplikasinya."},
+                    {n: "Maya K.", r: "Blogger", t: "UI/UX nya sangat memanjakan mata pembaca."},
+                    {n: "Eko M.", r: "UMKM", t: "Bisnis saya naik 50% setelah pakai jasa ini."},
+                    {n: "Ratna D.", r: "Guru", t: "Sistem pendataan sangat mudah digunakan."},
+                    {n: "Joko W.", r: "Developer", t: "Codingan rapi dan mudah dikembangkan lagi."},
+                    {n: "Fani R.", r: "Influencer", t: "Tampilan website saya jadi makin kece!"},
+                    {n: "Guntur S.", r: "Owner Cafe", t: "Sistem kasir customnya sangat membantu."},
+                    {n: "Lina P.", r: "Entrepreneur", t: "Support timnya luar biasa cepat."},
+                    {n: "Taufik H.", r: "IT Support", t: "Best service untuk pengembangan aplikasi."},
+                    {n: "Sarah M.", r: "Fashion Brand", t: "Sangat detail dalam setiap fitur yang diminta."},
+                    {n: "Dedi K.", r: "Logistik", t: "Pelacakan data jadi jauh lebih efisien."},
+                    {n: "Nina A.", r: "Content Creator", t: "Website portofolio saya jadi terlihat pro."},
+                    {n: "Wawan B.", r: "Kontraktor", t: "Hasil kerja sesuai dengan deadline."},
+                    {n: "Siska Y.", r: "Admin", t: "Input data jadi lebih cepat dan aman."},
+                    {n: "Bagas U.", r: "Mahasiswa", t: "Harga terjangkau, kualitas bintang lima!"}
+                ];
 
-                <!-- Testimonial 2 -->
-                <div class="p-6 clay-card-white flex flex-col justify-between">
-                    <div class="space-y-3">
-                        <div class="flex items-center gap-0.5">
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
-                            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                // Menduplikasi data untuk efek seamless infinite loop
+                const container = document.getElementById('marquee-content');
+                [...data, ...data].forEach((item) => {
+                    container.innerHTML += `
+                    <div class="clay-card-white p-6 w-[300px] flex-shrink-0 border border-slate-100">
+                        <div class="flex mb-3 text-amber-400">
+                            <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                            <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                            <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                            <i data-lucide="star" class="w-3 h-3 fill-current"></i>
+                            <i data-lucide="star" class="w-3 h-3 fill-current"></i>
                         </div>
-                        <p class="text-slate-600 text-[11px] leading-relaxed italic">
-                            "Proses pengerjaannya cukup cepat dan komunikasinya mudah. Website yang dihasilkan sesuai dengan kebutuhan pondok kami."
-                        </p>
-                    </div>
-                    <div class="flex items-center gap-2.5 mt-4 pt-3 border-t border-slate-100/60">
-                        <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-600 text-[10px] shadow-[inset_1px_1px_2px_rgba(255,255,255,0.8),_1px_1px_2px_rgba(0,0,0,0.05)]">AF</div>
-                        <div>
-                            <h4 class="font-display font-bold text-slate-900 text-xs">Ustadz Ahmad Fauzi</h4>
-                            <p class="text-slate-400 text-[9px]">Pengurus Ponpes Al-Nasr</p>
+                        <p class="text-slate-600 text-xs leading-relaxed mb-5 italic">"${item.t}"</p>
+                        <div class="flex items-center gap-3 border-t pt-4">
+                            <div class="w-8 h-8 rounded-full bg-brand-100 flex items-center justify-center font-bold text-[10px] text-brand-600 uppercase">${item.n.charAt(0)}</div>
+                            <div>
+                                <h4 class="font-bold text-xs text-slate-900">${item.n}</h4>
+                                <p class="text-[10px] text-slate-400">${item.r}</p>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
+                    </div>`;
+                });
+            </script>
         </div>
-    </section>
+    </div>
+</section>
+
+<script>
+    // Animasi GSAP Marquee
+    gsap.to("#marquee-content", {
+        xPercent: -50,
+        ease: "none",
+        duration: 60, // Kecepatan (semakin besar angkanya semakin lambat)
+        repeat: -1
+    });
+
+    // Jalankan Lucide Icons
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+</script>
 
     <!-- FAQ SECTION -->
     <section id="faq" class="py-12 md:py-14 border-t border-slate-100 bg-slate-100/50">
@@ -1498,8 +1525,7 @@
             <div class="pt-4 border-t border-slate-900/60 flex flex-col sm:flex-row justify-between items-center gap-2 text-[9px]">
                 <span>&copy; 2026 Nash Studio. Hak Cipta Dilindungi.</span>
                 <div class="flex items-center gap-3">
-                    <a href="#" class="hover:text-white transition-colors">Kebijakan Privasi</a>
-                    <a href="#" class="hover:text-white transition-colors">Syarat Ketentuan</a>
+                    <a href="legal.html" class="hover:text-brand-600">Kebijakan Privasi & Ketentuan</a>
                 </div>
             </div>
         </div>

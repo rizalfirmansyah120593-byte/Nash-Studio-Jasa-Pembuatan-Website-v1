@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kebijakan Privasi & Ketentuan - Nash Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] },
+                    colors: {
+                        brand: { 600: '#D97706', 500: '#F59E0B' },
+                        accent: { orange: '#EA580C' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #f8fafc; }
+        .clay-card-white { background: #ffffff; border-radius: 24px; box-shadow: 8px 8px 16px rgba(163, 177, 198, 0.45), -8px -8px 16px rgba(255, 255, 255, 0.9); }
+        .clay-btn-amber { background: #D97706; }
+    </style>
+</head>
+<body class="text-slate-800 antialiased">
+
+    <!-- HEADER (Sama dengan Index) -->
+    <header class="fixed top-0 left-0 w-full z-50 py-1.5 border-b-[0.5px] border-slate-100/80 bg-white/95">
+        <div class="max-w-6xl mx-auto px-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-600 to-accent-orange flex items-center justify-center text-white">
+                    <i data-lucide="code-2" class="w-4 h-4"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-bold text-sm text-slate-900 leading-tight">Nash <span class="text-brand-600">Studio</span></span>
+                    <span class="text-[8px] text-slate-400 font-bold uppercase">Digital Partner</span>
+                </div>
+            </a>
+            <nav class="hidden md:flex items-center gap-4 font-medium text-[11px] uppercase text-slate-600">
+                <a href="index.html#solusi" class="hover:text-brand-600">Layanan</a>
+                <a href="index.html#portfolio" class="hover:text-brand-600">Portofolio</a>
+                <a href="index.html#pricing" class="hover:text-brand-600">Paket Harga</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- CONTENT -->
+    <main class="pt-28 pb-16 px-4 max-w-3xl mx-auto">
+        <div class="clay-card-white p-8">
+            <h1 class="text-2xl font-extrabold text-slate-900 mb-6">Kebijakan Privasi & Ketentuan</h1>
+            
+            <h2 class="font-bold text-lg text-brand-600 mt-6 mb-2">1. Privasi Data</h2>
+            <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                Kami menghargai privasi Anda. Semua informasi yang Anda bagikan selama sesi konsultasi hanya digunakan untuk keperluan pengembangan proyek dan tidak akan disebarkan kepada pihak ketiga.
+            </p>
+
+            <h2 class="font-bold text-lg text-brand-600 mt-6 mb-2">2. Ketentuan Pengerjaan</h2>
+            <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                Pengerjaan dimulai setelah deposit diterima. Estimasi waktu yang tertera pada paket adalah hari kerja dan dapat disesuaikan berdasarkan kompleksitas fitur tambahan.
+            </p>
+
+            <h2 class="font-bold text-lg text-brand-600 mt-6 mb-2">3. Revisi</h2>
+            <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                Kami menyediakan layanan revisi sesuai dengan ketentuan paket yang dipilih untuk memastikan hasil akhir sesuai dengan ekspektasi Anda.
+            </p>
+        </div>
+    </main>
+
+    <!-- FOOTER (Sama dengan Index) -->
+    <footer class="py-8 border-t border-slate-100 bg-white text-center">
+        <p class="text-[10px] text-slate-400 font-medium uppercase tracking-widest">
+            &copy; 2026 Nash Studio. Seluruh Hak Cipta Dilindungi.
+        </p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
