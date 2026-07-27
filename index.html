@@ -14,7 +14,34 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <!-- GSAP CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     
+    <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    const stats = [
+        { id: "#stat-1", val: 100 },
+        { id: "#stat-2", val: 100 },
+        { id: "#stat-3", val: 100 },
+        { id: "#stat-4", val: 100 }
+    ];
+
+    stats.forEach(stat => {
+        let obj = { count: 0 };
+        gsap.to(obj, {
+            count: stat.val,
+            duration: 2,
+            scrollTrigger: {
+                trigger: "#stats",
+                start: "top 80%", // Animasi mulai saat section terlihat 80%
+            },
+            onUpdate: function() {
+                document.querySelector(stat.id).innerText = Math.floor(obj.count) + (stat.val === 100 ? "" : "+");
+            }
+        });
+    });
+</script>
+
     <script>
         tailwind.config = {
             theme: {
@@ -178,6 +205,7 @@
         }
         .text-gradient {
             background: linear-gradient(135deg, #D97706 0%, #EA580C 100%);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -268,7 +296,7 @@
 
             <!-- Subheading -->
             <p class="text-slate-500 text-xs sm:text-sm max-w-md font-normal leading-relaxed mb-4">
-                Kami membantu kamu mengembangkan website modern yang rapi, super cepat, dan mudah dikelola. Mulai dari landing page penjualan hingga sistem manajemen data internal otomatis.
+                Tingkatkan konversi penjualan dan efisiensi operasional dengan jasa pembuatan website profesional dari Nash Studio. Kami menghadirkan solusi digital modern yang super cepat, SEO-friendly, serta sistem manajemen data berbasis cloud yang otomatis dan mudah dikelola untuk segala skala bisnis.
             </p>
 
             <!-- Call to Actions (Perfect size match: w-50 / h-9 clay styled) -->
@@ -291,6 +319,27 @@
         </div>
     </section>
 
+    <section id="stats" class="py-10">
+    <div class="max-w-5xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div class="stat-item">
+            <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900" id="stat-1">100+</h3>
+            <p class="text-xs text-slate-500 mt-1 uppercase tracking-wider">Proyek Selesai</p>
+        </div>
+        <div class="stat-item">
+            <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900" id="stat-2">100+</h3>
+            <p class="text-xs text-slate-500 mt-1 uppercase tracking-wider">Klien Puas</p>
+        </div>
+        <div class="stat-item">
+            <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900" id="stat-3">100+</h3>
+            <p class="text-xs text-slate-500 mt-1 uppercase tracking-wider">Sistem Terintegrasi</p>
+        </div>
+        <div class="stat-item">
+            <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900" id="stat-4">100</h3>
+            <p class="text-xs text-slate-500 mt-1 uppercase tracking-wider">% Komitmen</p>
+        </div>
+    </div>
+</section>
+
     <!-- PROBLEM AGITATION SECTION -->
     <section class="py-12 md:py-14 border-t border-slate-100 bg-slate-100/50">
         <div class="max-w-5xl mx-auto px-4">
@@ -298,10 +347,10 @@
             <div class="text-center max-w-xl mx-auto mb-6">
                 <span class="text-[10px] font-bold tracking-wider text-brand-600 uppercase mb-0.5 block">Hambatan Bisnis</span>
                 <h2 class="font-display font-extrabold text-xl sm:text-2xl text-slate-900 mb-1 leading-tight">
-                    Apakah Kamu Sering Mengalami Kendala Ini?
+                    Mengapa Bisnis Anda Sulit Berkembang di Era Digital?
                 </h2>
                 <p class="text-slate-500 text-xs">
-                    Banyak bisnis dan organisasi kesulitan berkembang karena pengelolaan data yang manual dan pengeluaran sistem yang menguras anggaran.
+                    Banyak bisnis kehilangan peluang karena proses operasional yang masih manual serta tingginya biaya pemeliharaan sistem server tahunan.
                 </p>
             </div>
 
@@ -312,9 +361,9 @@
                     <div class="w-10 h-10 rounded-2xl bg-orange-100 text-accent-orange flex items-center justify-center mb-3 shadow-[inset_1.5px_1.5px_3px_rgba(255,255,255,0.8),_inset_-1.5px_-1.5px_3px_rgba(0,0,0,0.06)]">
                         <i data-lucide="alert-triangle" class="w-5 h-5"></i>
                     </div>
-                    <h3 class="font-display font-bold text-sm text-slate-900 mb-1">Belum Punya Website</h3>
+                    <h3 class="font-display font-bold text-sm text-slate-900 mb-1">Identitas Digital yang Belum Profesional</h3>
                     <p class="text-slate-500 text-[11px] leading-relaxed">
-                        Calon pembeli akan sulit menaruh kepercayaan penuh jika profil usahamu tidak dapat ditemukan di mesin pencari Google.
+                        Bisnis atau proyek Anda kesulitan bersaing karena belum memiliki Company Profile atau portal informasi yang terlihat kredibel. Tanpa visual yang estetik, calon mitra akan meragukan profesionalisme Anda.
                     </p>
                 </div>
 
@@ -323,9 +372,9 @@
                     <div class="w-10 h-10 rounded-2xl bg-orange-100 text-accent-orange flex items-center justify-center mb-3 shadow-[inset_1.5px_1.5px_3px_rgba(255,255,255,0.8),_inset_-1.5px_-1.5px_3px_rgba(0,0,0,0.06)]">
                         <i data-lucide="book-open" class="w-5 h-5"></i>
                     </div>
-                    <h3 class="font-display font-bold text-sm text-slate-900 mb-1">Pencatatan Masih Manual</h3>
+                    <h3 class="font-display font-bold text-sm text-slate-900 mb-1">Pengalaman Pengguna (UX) yang Lambat</h3>
                     <p class="text-slate-500 text-[11px] leading-relaxed">
-                        Pengelolaan stok, kasir harian, dan keuangan usahamu rawan berantakan jika hanya mengandalkan buku catatan fisik.
+                        Website streaming atau portal berita yang lambat diakses akan membuat pengunjung pergi dalam hitungan detik. Kami memastikan loading speed super cepat agar audiens Anda betah berlama-lama.
                     </p>
                 </div>
 
@@ -334,7 +383,7 @@
                     <div class="w-10 h-10 rounded-2xl bg-orange-100 text-accent-orange flex items-center justify-center mb-3 shadow-[inset_1.5px_1.5px_3px_rgba(255,255,255,0.8),_inset_-1.5px_-1.5px_3px_rgba(0,0,0,0.06)]">
                         <i data-lucide="dollar-sign" class="w-5 h-5"></i>
                     </div>
-                    <h3 class="font-display font-bold text-sm text-slate-900 mb-1">Biaya Server Sangat Mahal</h3>
+                    <h3 class="font-display font-bold text-sm text-slate-900 mb-1">Manajemen Konten yang Rumit</h3>
                     <p class="text-slate-500 text-[11px] leading-relaxed">
                         Ingin menerapkan sistem digital tapi terhambat oleh besarnya biaya sewa hosting dan server tahunan yang terus naik.
                     </p>
@@ -346,17 +395,22 @@
                 <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.12),transparent)] pointer-events-none"></div>
                 <div class="relative z-10 max-w-4xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                     <div class="space-y-1">
-                        <span class="inline-block px-2.5 py-0.5 bg-white/20 backdrop-blur-md rounded-full text-[9px] font-bold tracking-wider uppercase shadow-[inset_1px_1px_2px_rgba(255,255,255,0.4)]">Inovasi Bebas Biaya Server</span>
-                        <h3 class="font-display font-extrabold text-lg leading-tight">Solusi Bebas Biaya Server Tahunan!</h3>
-                        <p class="text-white/90 text-[11px] max-w-xl font-normal leading-relaxed">
-                            Kami merancang website dan sistem internal cerdas menggunakan infrastruktur cloud handal. Hasilnya cepat, aman, stabil, dan 100% bebas biaya langganan hosting selamanya.
-                        </p>
-                    </div>
-                    <a href="#pricing" class="px-4 py-2.5 rounded-xl bg-white text-brand-700 font-bold hover:bg-slate-50 active:scale-95 transition-all duration-150 text-[11px] shrink-0 shadow-[4px_4px_8px_rgba(0,0,0,0.08),_inset_2px_2px_4px_rgba(255,255,255,0.8)]">
-                        Lihat Jasa Kami
-                    </a>
-                </div>
-            </div>
+                        <span class="bg-white/20 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider mb-3 inline-block border border-white/30">
+            Solusi All-in-One
+        </span>
+        <h3 class="text-xl md:text-2xl font-bold mb-2">Website Berperforma Tinggi, Siap Skala Besar!</h3>
+        <p class="text-orange-50 text-xs md:text-sm opacity-90 leading-relaxed max-w-lg">
+            Bangun platform streaming, portal berita, atau company profile yang modern. Sistem kami dirancang untuk menangani trafik tinggi dan bebas biaya hosting selamanya.
+        </p>
+    </div>
+    
+    <!-- Bagian Tombol (Dibuat lebih menonjol) -->
+    <div class="flex-shrink-0">
+        <a href="#konsultasi" class="bg-white text-orange-600 px-6 py-3 rounded-xl font-bold text-sm hover:bg-orange-50 transition-colors shadow-lg flex items-center gap-2 whitespace-nowrap">
+            Konsultasi Sekarang <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+    </div>
+</div>
         </div>
     </section>
 
@@ -465,23 +519,29 @@
                     Semua
                 </button>
                 <button onclick="filterPortfolio('landing')" id="tab-landing" class="portfolio-tab px-3.5 py-1 rounded-full text-[11px] font-semibold transition-all duration-200 bg-white text-slate-600 border border-slate-200 hover:bg-slate-50">
-                    Landing Page
+                    Company Profile
                 </button>
-                <button onclick="filterPortfolio('profile')" id="tab-profile" class="portfolio-tab px-3.5 py-1 rounded-full text-[11px] font-semibold transition-all duration-200 bg-white text-slate-600 border border-slate-200 hover:bg-slate-50">
-                    Sistem & Company Profile
+                <button onclick="filterPortfolio('streaming')" id="tab-streaming" class="portfolio-tab px-3.5 py-1 rounded-full text-[11px] font-semibold transition-all duration-200 bg-white text-slate-600 border border-slate-200 hover:bg-slate-50">
+                    Streaming
+                </button>
+                <button onclick="filterPortfolio('product')" id="tab-product" class="portfolio-tab px-3.5 py-1 rounded-full text-[11px] font-semibold transition-all duration-200 bg-white text-slate-600 border border-slate-200 hover:bg-slate-50">
+                    Product Showcase
+                </button>
+                <button onclick="filterPortfolio('portfolio')" id="tab-portfolio" class="portfolio-tab px-3.5 py-1 rounded-full text-[11px] font-semibold transition-all duration-200 bg-white text-slate-600 border border-slate-200 hover:bg-slate-50">
+                    Portfolio
                 </button>
             </div>
 
             <!-- Portfolio Grid -->
             <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 
-                <!-- Portfolio Item 1: Omah Wonogiri (Reservasi Resto) -->
-                <div class="portfolio-item clay-card-white overflow-hidden hover:scale-[1.01] transition-all duration-300 flex flex-col group" data-category="profile">
+                <!-- Portfolio Item 1: AniStream -->
+                <div class="portfolio-item clay-card-white overflow-hidden hover:scale-[1.01] transition-all duration-300 flex flex-col group" data-category="streaming">
                     <div class="relative overflow-hidden aspect-[16/9] bg-[#FAF8F5]">
                         <div class="absolute inset-0 bg-gradient-to-tr from-brand-900/10 to-transparent z-10"></div>
                         
                         <!-- 3D Minimalist Joglo Clay Illustration SVG -->
-                        <svg class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <img src="assets/images/AniStream.png" alt="Nama Proyek" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                             <defs>
                                 <radialGradient id="sky-grad" cx="50%" cy="50%" r="50%">
                                     <stop offset="0%" stop-color="#FFFDF9"/>
@@ -558,26 +618,26 @@
                     </div>
                     <div class="p-4 flex-grow flex flex-col justify-between">
                         <div>
-                            <span class="px-2 py-0.5 bg-brand-50 text-brand-600 rounded-full text-[9px] font-bold uppercase tracking-wider mb-1 inline-block">Company Profile & Reservasi</span>
-                            <h3 class="font-display font-bold text-base text-slate-900 mb-0.5">Omah Wonogiri</h3>
+                            <span class="px-2 py-0.5 bg-brand-50 text-brand-600 rounded-full text-[9px] font-bold uppercase tracking-wider mb-1 inline-block">Nonton Anime Gratis</span>
+                            <h3 class="font-display font-bold text-base text-slate-900 mb-0.5">AniStream</h3>
                             <p class="text-slate-500 text-[11px] leading-relaxed mb-3">
-                                Desain modern untuk sistem pemesanan makanan, katalog menu masakan, dan formulir reservasi meja restoran secara cepat.
+                                Platform streaming anime GRATIS dengan koleksi lengkap, kualitas HD, dan pembaruan episode tercepat.
                             </p>
                         </div>
-                        <a href="https://new-omah-wonogiri-resto-v3.vercel.app/" target="_blank" class="w-full py-1.5 rounded-lg border border-slate-200 hover:border-brand-500 hover:text-brand-600 text-slate-600 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors duration-150">
+                        <a href="https://anistreaming.com" target="_blank" class="w-full py-1.5 rounded-lg border border-slate-200 hover:border-brand-500 hover:text-brand-600 text-slate-600 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors duration-150">
                             <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
                             <span>Lihat Demo Web</span>
                         </a>
                     </div>
                 </div>
 
-                <!-- Portfolio Item 2: Sistem Keuangan Masjid -->
-                <div class="portfolio-item clay-card-white overflow-hidden hover:scale-[1.01] transition-all duration-300 flex flex-col group" data-category="profile">
+                <!-- Portfolio Item 2: Filmanesia -->
+                <div class="portfolio-item clay-card-white overflow-hidden hover:scale-[1.01] transition-all duration-300 flex flex-col group" data-category="streaming">
                     <div class="relative overflow-hidden aspect-[16/9] bg-[#FFFBEB]">
                         <div class="absolute inset-0 bg-gradient-to-tr from-brand-900/10 to-transparent z-10"></div>
                         
                         <!-- 3D Minimalist Mosque & Financial Clay Illustration SVG -->
-                        <svg class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <img src="assets/images/Filmanesia.png" alt="Filmanesia" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                             <defs>
                                 <radialGradient id="masjid-sky" cx="50%" cy="50%" r="50%">
                                     <stop offset="0%" stop-color="#FEFDF9"/>
@@ -659,26 +719,26 @@
                     </div>
                     <div class="p-4 flex-grow flex flex-col justify-between">
                         <div>
-                            <span class="px-2 py-0.5 bg-brand-50 text-brand-600 rounded-full text-[9px] font-bold uppercase tracking-wider mb-1 inline-block">Sistem Informasi & Keuangan</span>
-                            <h3 class="font-display font-bold text-base text-slate-900 mb-0.5">Sistem Keuangan Masjid</h3>
+                            <span class="px-2 py-0.5 bg-brand-50 text-brand-600 rounded-full text-[9px] font-bold uppercase tracking-wider mb-1 inline-block">Nonton Film Gratis</span>
+                            <h3 class="font-display font-bold text-base text-slate-900 mb-0.5">Filmanesia</h3>
                             <p class="text-slate-500 text-[11px] leading-relaxed mb-3">
-                                Aplikasi pencatatan kas masjid transparan, laporan donasi real-time, dan manajemen inventaris umat berbasis cloud otomatis.
+                                Portal informasi film dan serial TV terlengkap dengan fitur pencarian canggih dan update tren film terbaru.
                             </p>
                         </div>
-                        <a href="https://sites.google.com/view/sistem-keuangan-masjid-v1/" target="_blank" class="w-full py-1.5 rounded-lg border border-slate-200 hover:border-brand-500 hover:text-brand-600 text-slate-600 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors duration-150">
+                        <a href="https://filmanesia.com/" target="_blank" class="w-full py-1.5 rounded-lg border border-slate-200 hover:border-brand-500 hover:text-brand-600 text-slate-600 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors duration-150">
                             <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
                             <span>Lihat Demo Web</span>
                         </a>
                     </div>
                 </div>
 
-                <!-- Portfolio Item 3: Masterclass Video Creator 2026 -->
+                <!-- Portfolio Item 3: Golden Dragon Carpet -->
                 <div class="portfolio-item clay-card-white overflow-hidden hover:scale-[1.01] transition-all duration-300 flex flex-col group" data-category="landing">
                     <div class="relative overflow-hidden aspect-[16/9] bg-[#E0E7FF]">
                         <div class="absolute inset-0 bg-gradient-to-tr from-brand-900/10 to-transparent z-10"></div>
                         
                         <!-- 3D Minimalist Video & Camera Clay Illustration SVG -->
-                        <svg class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <img src="assets/images/Karpet.png" alt="Nama Proyek" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                             <defs>
                                 <radialGradient id="indigo-sky" cx="50%" cy="50%" r="50%">
                                     <stop offset="0%" stop-color="#EEF2FF"/>
@@ -743,26 +803,26 @@
                     </div>
                     <div class="p-4 flex-grow flex flex-col justify-between">
                         <div>
-                            <span class="px-2 py-0.5 bg-brand-50 text-brand-600 rounded-full text-[9px] font-bold uppercase tracking-wider mb-1 inline-block">Landing Page</span>
-                            <h3 class="font-display font-bold text-base text-slate-900 mb-0.5">Masterclass Video Creator 2026</h3>
+                            <span class="px-2 py-0.5 bg-brand-50 text-brand-600 rounded-full text-[9px] font-bold uppercase tracking-wider mb-1 inline-block">Company Profile</span>
+                            <h3 class="font-display font-bold text-base text-slate-900 mb-0.5">Golden Dragon Carpet</h3>
                             <p class="text-slate-500 text-[11px] leading-relaxed mb-3">
-                                Landing page pendaftaran seminar akbar teknik editing video modern secara daring maupun luring dengan konversi tinggi.
+                                Website profil bisnis karpet premium yang menampilkan katalog produk elegan, galeri hasil pengerjaan, dan informasi kontak.
                             </p>
                         </div>
-                        <a href="https://sites.google.com/view/pendaftaran-seminar-editing-vi" target="_blank" class="w-full py-1.5 rounded-lg border border-slate-200 hover:border-brand-500 hover:text-brand-600 text-slate-600 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors duration-150">
+                        <a href="https://goldendragoncarpet.com" target="_blank" class="w-full py-1.5 rounded-lg border border-slate-200 hover:border-brand-500 hover:text-brand-600 text-slate-600 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors duration-150">
                             <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
                             <span>Lihat Demo Web</span>
                         </a>
                     </div>
                 </div>
 
-                <!-- Portfolio Item 4: Sistem Kasir Pintar -->
-                <div class="portfolio-item clay-card-white overflow-hidden hover:scale-[1.01] transition-all duration-300 flex flex-col group" data-category="profile">
+                <!-- Portfolio Item 4: Product Showcase -->
+                <div class="portfolio-item clay-card-white overflow-hidden hover:scale-[1.01] transition-all duration-300 flex flex-col group" data-category="product">
                     <div class="relative overflow-hidden aspect-[16/9] bg-[#F1F5F9]">
                         <div class="absolute inset-0 bg-gradient-to-tr from-brand-900/10 to-transparent z-10"></div>
                         
                         <!-- 3D Minimalist POS Cash Register Clay Illustration SVG -->
-                        <svg class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <img src="assets/images/beer.png" alt="Nama Proyek" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                             <defs>
                                 <radialGradient id="pos-sky" cx="50%" cy="50%" r="50%">
                                     <stop offset="0%" stop-color="#FFFFFF"/>
@@ -832,27 +892,26 @@
                     </div>
                     <div class="p-4 flex-grow flex flex-col justify-between">
                         <div>
-                            <span class="px-2 py-0.5 bg-brand-50 text-brand-600 rounded-full text-[9px] font-bold uppercase tracking-wider mb-1 inline-block">Aplikasi Kasir & POS</span>
-                            <h3 class="font-display font-bold text-base text-slate-900 mb-0.5">Sistem Kasir Pintar</h3>
+                            <span class="px-2 py-0.5 bg-brand-50 text-brand-600 rounded-full text-[9px] font-bold uppercase tracking-wider mb-1 inline-block">Landing Page</span>
+                            <h3 class="font-display font-bold text-base text-slate-900 mb-0.5">Beer GSAP Web</h3>
                             <p class="text-slate-500 text-[11px] leading-relaxed mb-3">
-                                Sistem POS kasir digital cerdas, cetak struk otomatis, integrasi barcode scanner, dan laporan laba rugi bulanan langsung di HP.
+                                Eksperimen web kreatif menggunakan teknologi GSAP untuk animasi interaktif yang dinamis dan visual yang memukau.
                             </p>
                         </div>
-                        <a href="https://sites.google.com/view/sistem-kasir-v2/keuangan" target="_blank" class="w-full py-1.5 rounded-lg border border-slate-200 hover:border-brand-500 hover:text-brand-600 text-slate-600 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors duration-150">
+                        <a href="https://beer-gsap-web.vercel.app/" target="_blank" class="w-full py-1.5 rounded-lg border border-slate-200 hover:border-brand-500 hover:text-brand-600 text-slate-600 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors duration-150">
                             <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
                             <span>Lihat Demo Web</span>
                         </a>
                     </div>
                 </div>
 
-                <!-- Portfolio Item 5: NashCafe (Reservasi Cafe) -->
-                <div class="portfolio-item clay-card-white overflow-hidden hover:scale-[1.01] transition-all duration-300 flex flex-col group" data-category="profile">
+                <!-- Portfolio Item 5: Portofolio Project -->
+                <div class="portfolio-item clay-card-white overflow-hidden hover:scale-[1.01] transition-all duration-300 flex flex-col group" data-category="portfolio">
                     <div class="relative overflow-hidden aspect-[16/9] bg-[#F7F2EB]">
                         <div class="absolute inset-0 bg-gradient-to-tr from-brand-900/10 to-transparent z-10"></div>
                         
                         <!-- 3D Minimalist Coffee Cup Clay Illustration SVG -->
-                        <svg class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
+                        <img src="assets/images/portofolio.png" alt="Nama Proyek" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                                 <radialGradient id="coffee-bg" cx="50%" cy="50%" r="50%">
                                     <stop offset="0%" stop-color="#FDFBF7"/>
                                     <stop offset="100%" stop-color="#EADCC9"/>
@@ -909,13 +968,13 @@
                     </div>
                     <div class="p-4 flex-grow flex flex-col justify-between">
                         <div>
-                            <span class="px-2 py-0.5 bg-brand-50 text-brand-600 rounded-full text-[9px] font-bold uppercase tracking-wider mb-1 inline-block">Company Profile & Reservasi</span>
-                            <h3 class="font-display font-bold text-base text-slate-900 mb-0.5">NashCafe</h3>
+                            <span class="px-2 py-0.5 bg-brand-50 text-brand-600 rounded-full text-[9px] font-bold uppercase tracking-wider mb-1 inline-block">Portfolio Project</span>
+                            <h3 class="font-display font-bold text-base text-slate-900 mb-0.5">Portfolio</h3>
                             <p class="text-slate-500 text-[11px] leading-relaxed mb-3">
-                                Platform website profil kedai kopi modern yang dilengkapi modul daftar menu digital terintegrasi dan sistem pesan meja reservasi.
+                                Website portfolio pribadi yang menampilkan keahlian sebagai Full-Stack Developer dengan desain 3D modern dan interaktif.
                             </p>
                         </div>
-                        <a href="https://sites.google.com/view/pemesanan-reservasi-cafe-v3" target="_blank" class="w-full py-1.5 rounded-lg border border-slate-200 hover:border-brand-500 hover:text-brand-600 text-slate-600 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors duration-150">
+                        <a href="https://rizal-firmansyah-portofolio.vercel.app" target="_blank" class="w-full py-1.5 rounded-lg border border-slate-200 hover:border-brand-500 hover:text-brand-600 text-slate-600 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors duration-150">
                             <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
                             <span>Lihat Demo Web</span>
                         </a>
@@ -1011,10 +1070,10 @@
             <div class="text-center max-w-xl mx-auto mb-6">
                 <span class="text-[10px] font-bold tracking-wider text-brand-600 uppercase mb-0.5 block">Keunggulan Kami</span>
                 <h2 class="font-display font-extrabold text-xl sm:text-2xl text-slate-900 mb-1">
-                    Kenapa Mempercayakan Nash Studio?
+                    Jasa Pembuatan Website Profesional & Sistem Otomatisasi Bisnis
                 </h2>
                 <p class="text-slate-500 text-xs">
-                    Kami memahami kamu memerlukan hasil terbaik yang langsung mendongkrak penjualan atau menyederhanakan tugas administrasi secara praktis.
+                    Tingkatkan konversi penjualan dan efisiensi operasional dengan solusi digital yang dirancang khusus untuk skala bisnis Anda..
                 </p>
             </div>
 
@@ -1029,7 +1088,7 @@
                         <div>
                             <h4 class="font-display font-bold text-sm text-slate-900 mb-0.5">Desain Estetik & Responsif</h4>
                             <p class="text-slate-500 text-[11px] leading-relaxed">
-                                Tampilan premium yang dioptimalkan agar selalu nyaman dibaca saat diakses dari HP, tablet, maupun komputer.
+                                Tampilan premium yang mobile-friendly dan dioptimalkan agar nyaman diakses dari semua perangkat, meningkatkan pengalaman pengguna (UX).
                             </p>
                         </div>
                     </div>
@@ -1042,7 +1101,7 @@
                         <div>
                             <h4 class="font-display font-bold text-sm text-slate-900 mb-0.5">Performa Ringan & Cepat</h4>
                             <p class="text-slate-500 text-[11px] leading-relaxed">
-                                Kami merancang struktur kode yang efisien, sehingga websitemu memuat halaman secepat kilat dan lebih mudah ditemukan di Google.
+                                Arsitektur kode yang efisien memastikan loading speed secepat kilat, faktor krusial untuk menempati posisi teratas di hasil pencarian Google.
                             </p>
                         </div>
                     </div>
@@ -1055,7 +1114,7 @@
                         <div>
                             <h4 class="font-display font-bold text-sm text-slate-900 mb-0.5">Gratis Dukungan Teknis & Revisi</h4>
                             <p class="text-slate-500 text-[11px] leading-relaxed">
-                                Menjamin kepuasan penuh kamu lewat paket revisi gratis serta pendampingan pasca-pengerjaan agar sistem selalu berjalan mulus.
+                                Integrasi penuh dengan Google Sheets & Google Workspace, memberikan sistem manajemen data yang aman, stabil, dan mudah dikelola secara real-time.
                             </p>
                         </div>
                     </div>
@@ -1388,62 +1447,57 @@
 </script>
 
     <!-- FAQ SECTION -->
-    <section id="faq" class="py-12 md:py-14 border-t border-slate-100 bg-slate-100/50">
-        <div class="max-w-2xl mx-auto px-4">
-            <!-- Header -->
-            <div class="text-center mb-6">
-                <span class="text-[10px] font-bold tracking-wider text-brand-600 uppercase mb-0.5 block">Pusat Bantuan</span>
-                <h2 class="font-display font-extrabold text-xl sm:text-2xl text-slate-900 mb-1">
-                    Pertanyaan yang Sering Diajukan
-                </h2>
-                <p class="text-slate-500 text-xs">
-                    Berikut adalah jawaban dari beberapa pertanyaan mendasar seputar pengerjaan website bersama Nash Studio.
-                </p>
-            </div>
+    <section class="py-16 bg-white">
+    <div class="max-w-3xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-2">Pertanyaan yang Sering Diajukan</h2>
+        <p class="text-center text-gray-600 mb-10">Berikut adalah jawaban mendasar seputar pengerjaan website bersama Nash Studio.</p>
 
-            <!-- FAQ Accordions -->
-            <div class="space-y-3">
-                <!-- FAQ Item 1 -->
-                <div class="accordion-item clay-card-white overflow-hidden transition-all duration-200">
-                    <button onclick="toggleAccordion(this)" class="w-full py-3.5 px-4 flex items-center justify-between text-left font-display font-bold text-xs text-slate-900 hover:text-brand-600 transition-colors duration-150">
-                        <span>Apakah website dari Nash Studio memerlukan biaya hosting tahunan?</span>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 transition-transform duration-200 transform shrink-0"></i>
-                    </button>
-                    <div class="accordion-content bg-slate-50/20">
-                        <div class="p-4 pt-0 text-slate-500 text-[11px] leading-relaxed border-t border-slate-100/50">
-                            Tidak perlu! Sistem modern yang kami bangun memanfaatkan efisiensi cloud server handal sehingga kamu 100% bebas dari biaya tagihan sewa hosting tahunan selamanya.
-                        </div>
-                    </div>
-                </div>
+        <div class="space-y-4" id="faq">
+            <!-- FAQ Data -->
+            <script>
+                const faqData = [
+                    { q: "Apakah website dari Nash Studio memerlukan biaya hosting tahunan?", a: "Tidak. Kami memberikan solusi unik di mana Anda tidak perlu lagi membayar biaya hosting atau sewa server tahunan yang mahal. Semuanya sudah terintegrasi dalam paket kami." },
+                    { q: "Apakah harga yang tertera sudah termasuk domain kustom?", a: "Ya, paket kami mencakup pendaftaran domain kustom (.com, .id, dsb) tahun pertama sebagai bagian dari layanan profesional kami." },
+                    { q: "Bagaimana cara mengelola isi konten website setelah selesai pengerjaan?", a: "Kami menyediakan panduan pengelolaan atau sistem dashboard yang sangat intuitif dan mudah digunakan, bahkan bagi Anda yang awam dengan teknologi." },
+                    { q: "Berapa lama rata-rata durasi pengerjaan sebuah website?", a: "Proses pengerjaan kilat kami rata-rata memakan waktu 3 hingga 7 hari kerja, tergantung pada kompleksitas fitur yang Anda butuhkan." },
+                    { q: "Apakah saya akan mendapatkan dukungan teknis setelah website online?", a: "Tentu, kami menyediakan layanan pendampingan dan dukungan teknis pasca-pengerjaan untuk memastikan website Anda selalu berjalan mulus." },
+                    { q: "Bisakah website dibuat agar mudah ditemukan di Google (SEO)?", a: "Ya, kami menerapkan teknik SEO dasar pada struktur kode dan konten untuk membantu website Anda lebih mudah ditemukan oleh mesin pencari." },
+                    { q: "Apakah website ini aman dari serangan siber?", a: "Kami menggunakan infrastruktur cloud dengan standar keamanan tingkat tinggi yang stabil dan tangguh terhadap berbagai ancaman siber." },
+                    { q: "Apa perbedaan layanan Nash Studio dengan jasa pembuatan website biasa?", a: "Kami fokus pada tiga hal utama: kecepatan loading yang tinggi, integrasi data otomatis, dan eliminasi biaya operasional hosting selamanya." },
+                    { q: "Apakah saya bisa memesan fitur khusus seperti sistem reservasi atau katalog?", a: "Tentu saja. Kami menerima kustomisasi fitur agar alur kerja digital Anda benar-benar sesuai dengan kebutuhan operasional bisnis Anda." },
+                    { q: "Bagaimana cara memulai konsultasi gratis?", a: "Sangat mudah! Anda cukup menekan tombol 'Konsultasi Gratis' yang ada di menu navigasi, dan tim kami akan segera menghubungi Anda." }
+                ];
+            </script>
 
-                <!-- FAQ Item 2 -->
-                <div class="accordion-item clay-card-white overflow-hidden transition-all duration-200">
-                    <button onclick="toggleAccordion(this)" class="w-full py-3.5 px-4 flex items-center justify-between text-left font-display font-bold text-xs text-slate-900 hover:text-brand-600 transition-colors duration-150">
-                        <span>Apakah harga yang tertera sudah termasuk domain kustom?</span>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 transition-transform duration-200 transform shrink-0"></i>
-                    </button>
-                    <div class="accordion-content bg-slate-50/20">
-                        <div class="p-4 pt-0 text-slate-500 text-[11px] leading-relaxed border-t border-slate-100/50">
-                            Harga dasar berfokus pada pengembangan sistem web. Jika kamu memerlukan alamat domain kustom (.com/.id) agar terlihat makin profesional, kami siap membantu pendaftarannya dengan biaya pendaftaran domain yang sangat murah per tahunnya.
-                        </div>
-                    </div>
-                </div>
-
-                <!-- FAQ Item 3 -->
-                <div class="accordion-item bg-white clay-card-white overflow-hidden transition-all duration-200">
-                    <button onclick="toggleAccordion(this)" class="w-full py-3.5 px-4 flex items-center justify-between text-left font-display font-bold text-xs text-slate-900 hover:text-brand-600 transition-colors duration-150">
-                        <span>Bagaimana cara mengelola isi konten website setelah selesai pengerjaan?</span>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 transition-transform duration-200 transform shrink-0"></i>
-                    </button>
-                    <div class="accordion-content bg-slate-50/20">
-                        <div class="p-4 pt-0 text-slate-500 text-[11px] leading-relaxed border-t border-slate-100/50">
-                            Setiap project dilengkapi panduan serta dasbor pengelolaan yang ramah pengguna. Kamu dapat dengan mudah mengubah teks, gambar, serta memantau data penjualan secara mandiri lewat HP tanpa perlu paham pemrograman.
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- Render FAQ Items -->
+            <div id="faq-list"></div>
         </div>
-    </section>
+    </div>
+</section>
+
+<script>
+    const faqList = document.getElementById('faq-list');
+    faqData.forEach((item, index) => {
+        faqList.innerHTML += `
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-4">
+                <button class="w-full text-left p-5 font-semibold text-gray-800 flex justify-between items-center hover:bg-gray-50 transition-colors" onclick="toggleFaq(${index})">
+                    ${item.q}
+                    <span id="icon-${index}" class="text-orange-500 text-xl font-bold">+</span>
+                </button>
+                <div id="content-${index}" class="px-5 pb-5 text-sm text-gray-600 hidden">
+                    ${item.a}
+                </div>
+            </div>
+        `;
+    });
+
+    function toggleFaq(index) {
+        const content = document.getElementById(`content-${index}`);
+        const icon = document.getElementById(`icon-${index}`);
+        content.classList.toggle('hidden');
+        icon.innerText = content.classList.contains('hidden') ? '+' : '-';
+    }
+</script>
 
     <!-- FINAL CTA SECTION -->
     <section class="py-12 bg-gradient-to-tr from-brand-900 to-accent-orange text-white relative overflow-hidden">
@@ -1477,7 +1531,7 @@
                         <span class="font-display font-extrabold text-sm text-white tracking-tight">Nash <span class="text-brand-500">Studio</span></span>
                     </div>
                     <p class="text-[11px] text-slate-400 max-w-sm leading-relaxed">
-                        Jasa pengerjaan website inovatif dan pengembangan sistem administrasi berbasis cloud modern dengan biaya yang sangat terjangkau bagi UMKM, sekolah, dan semua kalangan.
+                        Solusi jasa pembuatan website profesional di Jakarta untuk UMKM, sekolah, dan organisasi. Kami menghadirkan website modern, responsif, dan sistem administrasi berbasis cloud yang terintegrasi untuk membantu digitalisasi bisnis Anda dengan biaya yang sangat terjangkau.
                     </p>
                     <div class="flex items-center gap-2">
                         <a href="#" class="w-7 h-7 rounded-full bg-slate-900 hover:bg-brand-600 hover:text-white flex items-center justify-center transition-colors duration-150 text-slate-400 shadow-[inset_1px_1px_2px_rgba(255,255,255,0.1)]">
